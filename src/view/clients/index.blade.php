@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <title>Hospital</title>
+    <title>Bank</title>
 </head>
 <body class="bg-gray-100 flex items-center justify-center">
 
@@ -17,43 +17,65 @@
             </div>
 
             <div class="px-12 pb-10">
-                <div class="text-center text-5xl mb-8 font-bold">Doctors</div>
-
-                <!-- Filter and sort form -->
-                <!--
-                <form action="/controllers/doctors/index.php" method="get" class="mb-4">
-                    <div class="space-y-2">
-                        Filter by
-                        <input type="text" name="personalnumber" placeholder="Personal Number" class="border rounded px-3 py-2 mr-2">
-                        <input type="text" name="name" placeholder="Name" class="border rounded px-3 py-2 mr-2">
-                        <input type="text" name="position" placeholder="Position" class="border rounded px-3 py-2 mr-2">
-                    </div>
-                    <div class="mt-2 space-y-2">
-                        Sort by
-                        <select name="sort" class="border rounded px-3 py-2 mr-2">
-                            <option value="">Select field</option>
-                            <option value="name">Name</option>
-                        </select>
-                        <select name="direction" class="border rounded px-3 py-2 mr-2">
-                            <option value="asc">Ascending</option>
-                            <option value="desc">Descending</option>
-                        </select>
-                    </div>
-                    <input type="submit" value="Submit" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
-                </form>
-            -->
+                <div class="text-center text-5xl mb-8 font-bold">Clients</div>
 
                 <!-- Create form -->
-                <!--
-                <form action="/controllers/doctors/store.php" method="post" class="mb-4">
+                <form action="/controllers/clients/store.php" method="post" class="mb-4">
                     <div class="space-y-2">
-                        <input type="text" name="personalnumber" placeholder="Personal Number" class="border rounded px-3 py-2 mr-2">
-                        <input type="text" name="name" placeholder="Name" class="border rounded px-3 py-2 mr-2">
-                        <input type="text" name="position" placeholder="Position" class="border rounded px-3 py-2 mr-2">
+                        <input type="text" name="surname" placeholder="Surname" required maxlength="45" class="border rounded px-3 py-2 mr-2">
+                        <input type="text" name="firstname" placeholder="Firstname" required maxlength="45" class="border rounded px-3 py-2 mr-2">
+                        <input type="text" name="patronymic" placeholder="Patronymic" required maxlength="45" class="border rounded px-3 py-2 mr-2">
+                        <label for="birth_date">Birth Date:</label>
+                        <input type="date" name="birth_date" required class="border rounded px-3 py-2 mr-2">
+                        <label for="gender">Gender:</label>
+                        <select name="gender" required class="border rounded px-3 py-2 mr-2">
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                        </select>
+                        <input type="text" name="passport_series" placeholder="Passport Series" required maxlength="2" class="border rounded px-3 py-2 mr-2">
+                        <input type="text" name="passport_number" placeholder="Passport Number" required maxlength="7" class="border rounded px-3 py-2 mr-2">
+                        <input type="text" name="issued_by" placeholder="Issued By" required maxlength="100" class="border rounded px-3 py-2 mr-2">
+                        <label for="issue_date">Issue Date:</label>
+                        <input type="date" name="issue_date" required class="border rounded px-3 py-2 mr-2">
+                        <input type="text" name="id_number" placeholder="Id Number" required maxlength="14" class="border rounded px-3 py-2 mr-2">
+                        <input type="text" name="place_of_birth" placeholder="Place Of Birth" required maxlength="255" class="border rounded px-3 py-2 mr-2">
+                        <label for="city_of_residence">City of residence:</label>
+                        <select name="city_of_residence" required class="border rounded px-3 py-2 mr-2">
+                            @foreach ($cities as $city)
+                                <option value="{{ $city['id'] }}">{{ $city['name'] }}</option>
+                            @endforeach
+                        </select>
+                        <input type="text" name="residence_address" placeholder="Residence Address" required maxlength="255" class="border rounded px-3 py-2 mr-2">
+                        <input type="text" name="home_phone" placeholder="Home Phone" maxlength="9" class="border rounded px-3 py-2 mr-2">
+                        <input type="text" name="mobile_phone" placeholder="Mobile Phone" maxlength="9" class="border rounded px-3 py-2 mr-2">
+                        <input type="text" name="place_of_work" placeholder="Place Of Work" maxlength="45" class="border rounded px-3 py-2 mr-2">
+                        <input type="text" name="position_at_work" placeholder="Position At Work" maxlength="45" class="border rounded px-3 py-2 mr-2">
+                        <input type="text" name="email" placeholder="Email" maxlength="255" class="border rounded px-3 py-2 mr-2">
+                        <label for="registration_city">Registration City:</label>
+                        <select name="registration_city" required class="border rounded px-3 py-2 mr-2">
+                            @foreach ($cities as $city)
+                                <option value="{{ $city['id'] }}">{{ $city['name'] }}</option>
+                            @endforeach
+                        </select>
+                        <label for="marital_status">Marital Status:</label>
+                        <select name="marital_status" required class="border rounded px-3 py-2 mr-2">
+                            @foreach ($marital_statuses as $marital_status)
+                                <option value="{{ $marital_status['id'] }}">{{ $marital_status['name'] }}</option>
+                            @endforeach
+                        </select>
+                        <label for="citizenship">Citizenship:</label>
+                        <select name="citizenship" required class="border rounded px-3 py-2 mr-2">
+                            @foreach ($countries as $country)
+                                <option value="{{ $country['id'] }}">{{ $country['name'] }}</option>
+                            @endforeach
+                        </select>
+                        <label for="pensioner">Pensioner:</label>
+                        <input type="checkbox" id="pensioner" name="pensioner" value="1">
+                        <label for="monthly_income">Monthly Income:</label>
+                        <input type="number" id="monthly_income" name="monthly_income" step="100" min="0" class="border rounded px-3 py-2 mr-2">
                     </div>
                     <input type="submit" value="Create New" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
                 </form>
-            -->
 
                 <!-- Table -->
                 <div class="overflow-x-auto w-full">
@@ -70,8 +92,10 @@
                         <tbody>
                             @foreach ($clients as $client)
                                 <tr class="border-b hover:bg-orange-100">
-                                    @foreach ($client as $value)
-                                        @if (is_array($value) && isset($value['url']) && isset($value['text']))
+                                    @foreach ($client as $key => $value)
+                                        @if ($key == 'pensioner')
+                                            <td class="p-3 px-5">{{ $value == 1 ? 'Да' : 'Нет' }}</td>
+                                        @elseif (is_array($value) && isset($value['url']) && isset($value['text']))
                                             <td class="p-3 px-5"><a href="{{ $value['url'] }}" class="text-gray-500 hover:text-gray-900 hover:underline">{{ $value['text'] }}</a></td>
                                         @elseif (!is_array($value))
                                             <td class="p-3 px-5">{{ $value }}</td>
