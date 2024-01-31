@@ -1,0 +1,27 @@
+version: '3'
+services:
+  db: 
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=bank
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+  www:
+    build: .
+    volumes:
+      - "./src:/var/www/html"
+    ports:
+      - 80:80
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8001:80
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+volumes:
+  db_data:
