@@ -111,14 +111,12 @@
 
                                     <!-- Delete form -->
                                     <td class="text-red-500 p-3 px-5">
-                                        <!--
-                                        <form id="delete-form-{{ $doctor['doctorid'] }}" action="/controllers/doctors/destroy.php" method="post" onsubmit="return confirm('Are you sure you want to delete this record?');">
-                                            <input type="hidden" name="doctorid" value="{{ $doctor['doctorid'] }}">
+                                        <form id="delete-form-{{ $client['id'] }}" action="/controller/clients/destroy.php" method="post" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                                            <input type="hidden" name="id" value="{{ $client['id'] }}">
                                             <button type="submit" class="bg-transparent border-none">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </form>
-                                    -->
                                     </td>                             
                                 </tr>
 
@@ -204,7 +202,8 @@
                                             <button type="submit" class="bg-transparent border-none">
                                                 <i class="fas fa-check"></i>
                                             </button>
-                                        </td>                    
+                                        </td>       
+                                        <td class="p-3 px-5"></td>             
                                     </form>   
                                 </tr>                            
                             @endforeach
