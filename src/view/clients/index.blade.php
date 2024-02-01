@@ -20,7 +20,7 @@
                 <div class="text-center text-5xl mb-8 font-bold">Clients</div>
 
                 <!-- Create form -->
-                <form action="/controllers/clients/store.php" method="post" class="mb-4">
+                <form action="/controller/clients/store.php" method="post" class="mb-4">
                     <div class="space-y-2">
                         <input type="text" name="surname" placeholder="Surname" required maxlength="45" class="border rounded px-3 py-2 mr-2">
                         <input type="text" name="firstname" placeholder="Firstname" required maxlength="45" class="border rounded px-3 py-2 mr-2">
@@ -67,6 +67,12 @@
                         <select name="citizenship" required class="border rounded px-3 py-2 mr-2">
                             @foreach ($countries as $country)
                                 <option value="{{ $country['id'] }}">{{ $country['name'] }}</option>
+                            @endforeach
+                        </select>
+                        <label for="disability">Disability:</label>
+                        <select name="citizenship" required class="border rounded px-3 py-2 mr-2">
+                            @foreach ($disabilities as $disability)
+                                <option value="{{ $disability['id'] }}">{{ $disability['name'] }}</option>
                             @endforeach
                         </select>
                         <label for="pensioner">Pensioner:</label>

@@ -1,6 +1,7 @@
 <?php
 function executeQuery($query, $params = []) 
 {
+    global $connect;
     $connect = mysqli_connect(
         'db',
         'user',
