@@ -169,7 +169,6 @@ if (!empty($mobile_phone) && !preg_match('/^\d{6,9}$/', $mobile_phone)) {
 }
 
 
-
 $query = "INSERT INTO client (surname, firstname, patronymic, birth_date, gender, passport_series, passport_number, issued_by, issue_date, id_number, place_of_birth, city_of_residence, residence_address, home_phone, mobile_phone, place_of_work, position_at_work, email, registration_city, marital_status, citizenship, disability, pensioner, monthly_income) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $params = [
@@ -210,4 +209,3 @@ try {
     $errorMessage = str_replace("'", "\'", $e->getMessage());
     echo "<script>alert('Failed to create a client. Error: $errorMessage'); window.location.href='/controller/clients/index.php';</script>";
 }
-

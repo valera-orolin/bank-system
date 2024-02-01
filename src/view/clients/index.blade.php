@@ -124,8 +124,10 @@
 
                                 <!-- Update form -->
                                 <tr class="border-b hidden bg-blue-100">
-                                    <form id="edit-form-{{ $client['id'] }}" action="/controllers/clients/update.php" method="post">
-                                        <td class="p-3 px-5"></td>
+                                    <form id="edit-form-{{ $client['id'] }}" action="/controller/clients/update.php" method="post">
+                                        <td class="p-3 px-5">
+                                            <input type="hidden" name="id" value="{{ $client['id'] }}" class="border-none focus:outline-none focus:ring-0">
+                                        </td>
 
                                         <td class="p-3 px-5"><input value="{{ $client['surname'] }}" type="text" name="surname" placeholder="Surname" required maxlength="45" class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
 
