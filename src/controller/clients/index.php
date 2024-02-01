@@ -12,30 +12,35 @@ foreach ($clients as &$client) {
     $city_of_residence = executeQuery("SELECT name FROM city WHERE id = ?", [$client['city_of_residence']]);
     $client['city_of_residence'] = [
         'url' => '/',
+        'id' => $client['city_of_residence'],
         'text' => $city_of_residence[0]['name'],
     ];
 
     $registration_city = executeQuery("SELECT name FROM city WHERE id = ?", [$client['registration_city']]);
     $client['registration_city'] = [
         'url' => '/',
+        'id' => $client['registration_city'],
         'text' => $registration_city[0]['name'],
     ];
 
     $marital_status = executeQuery("SELECT name FROM marital_status WHERE id = ?", [$client['marital_status']]);
     $client['marital_status'] = [
         'url' => '/',
+        'id' => $client['marital_status'],
         'text' => $marital_status[0]['name'],
     ];
 
     $citizenship = executeQuery("SELECT name FROM country WHERE id = ?", [$client['citizenship']]);
     $client['citizenship'] = [
         'url' => '/',
+        'id' => $client['citizenship'],
         'text' => $citizenship[0]['name'],
     ];
 
     $disability = executeQuery("SELECT name FROM disability WHERE id = ?", [$client['disability']]);
     $client['disability'] = [
         'url' => '/',
+        'id' => $client['disability'],
         'text' => $disability[0]['name'],
     ];
 }

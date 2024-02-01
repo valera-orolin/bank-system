@@ -70,13 +70,13 @@
                             @endforeach
                         </select>
                         <label for="disability">Disability:</label>
-                        <select name="citizenship" required class="border rounded px-3 py-2 mr-2">
+                        <select name="disability" required class="border rounded px-3 py-2 mr-2">
                             @foreach ($disabilities as $disability)
                                 <option value="{{ $disability['id'] }}">{{ $disability['name'] }}</option>
                             @endforeach
                         </select>
                         <label for="pensioner">Pensioner:</label>
-                        <input type="checkbox" id="pensioner" name="pensioner" value="1">
+                        <input type="checkbox" id="pensioner" name="pensioner" value="1" class="border rounded px-3 py-2 mr-2">
                         <label for="monthly_income">Monthly Income:</label>
                         <input type="number" id="monthly_income" name="monthly_income" step="100" min="0" class="border rounded px-3 py-2 mr-2">
                     </div>
@@ -123,29 +123,87 @@
                                 </tr>
 
                                 <!-- Update form -->
-                                <tr class="border-b hidden">
-                                    <!--
-                                    <form id="edit-form-{{ $doctor['doctorid'] }}" action="/controllers/doctors/update.php" method="post">
-                                        @foreach ($doctor as $key => $value)
-                                            @if (strpos($key, 'link-') === 0)
-                                                <td class="p-3 px-5"></td>
-                                            @elseif ($key != 'doctorid')
-                                                <td class="p-3 px-5">
-                                                    <input type="text" name="{{ $key }}" value="{{ $value }}" class="border-none focus:outline-none focus:ring-0">
-                                                </td>
-                                            @else
-                                                <td class="p-3 px-5">
-                                                    <input type="hidden" name="{{ $key }}" value="{{ $value }}">
-                                                </td>
-                                            @endif
-                                        @endforeach
-                                        <td class="p-3 px-5 text-blue-500 cursor-pointer">
+                                <tr class="border-b hidden bg-blue-100">
+                                    <form id="edit-form-{{ $client['id'] }}" action="/controllers/clients/update.php" method="post">
+                                        <td class="p-3 px-5"></td>
+
+                                        <td class="p-3 px-5"><input value="{{ $client['surname'] }}" type="text" name="surname" placeholder="Surname" required maxlength="45" class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
+
+                                        <td class="p-3 px-5"><input value="{{ $client['firstname'] }}" type="text" name="firstname" placeholder="Firstname" required maxlength="45" class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
+
+                                        <td class="p-3 px-5"><input value="{{ $client['patronymic'] }}" type="text" name="patronymic" placeholder="Patronymic" required maxlength="45" class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
+
+                                        <td class="p-3 px-5"><input value="{{ $client['birth_date'] }}" type="date" name="birth_date" required class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
+
+                                        <td class="p-3 px-5"><select name="gender" required class="bg-blue-100 border rounded px-3 py-2 mr-2 focus:outline-none focus:ring-0">
+                                            <option value="F" {{ $client['gender'] == 'F' ? 'selected' : '' }}>Female</option>
+                                            <option value="M" {{ $client['gender'] == 'M' ? 'selected' : '' }}>Male</option>
+                                        </select></td>
+
+                                        <td class="p-3 px-5"><input value="{{ $client['passport_series'] }}" type="text" name="passport_series" placeholder="Passport Series" required maxlength="2" class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
+                                        
+                                        <td class="p-3 px-5"><input value="{{ $client['passport_number'] }}" type="text" name="passport_number" placeholder="Passport Number" required maxlength="7" class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
+
+                                        <td class="p-3 px-5"><input value="{{ $client['issued_by'] }}" type="text" name="issued_by" placeholder="Issued By" required maxlength="100" class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
+
+                                        <td class="p-3 px-5"><input value="{{ $client['issue_date'] }}" type="date" name="issue_date" required class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
+
+                                        <td class="p-3 px-5"><input value="{{ $client['id_number'] }}" type="text" name="id_number" placeholder="Id Number" required maxlength="14" class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
+
+                                        <td class="p-3 px-5"><input value="{{ $client['place_of_birth'] }}" type="text" name="place_of_birth" placeholder="Place Of Birth" required maxlength="255" class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
+
+                                        <td class="p-3 px-5"><select name="city_of_residence" required class="bg-blue-100 border rounded px-3 py-2 mr-2 focus:outline-none focus:ring-0">
+                                            @foreach ($cities as $city)
+                                                <option value="{{ $city['id'] }}" {{ $client['city_of_residence']['id'] == $city['id'] ? 'selected' : '' }}>{{ $city['name'] }}</option>
+                                            @endforeach
+                                        </select></td>
+
+                                        <td class="p-3 px-5"><input value="{{ $client['residence_address'] }}" type="text" name="residence_address" placeholder="Residence Address" required maxlength="255" class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
+
+                                        <td class="p-3 px-5"><input value="{{ $client['home_phone'] }}" type="text" name="home_phone" placeholder="Home Phone" maxlength="9" class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
+
+                                        <td class="p-3 px-5"><input value="{{ $client['mobile_phone'] }}" type="text" name="mobile_phone" placeholder="Mobile Phone" maxlength="9" class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
+                                        
+                                        <td class="p-3 px-5"><input value="{{ $client['place_of_work'] }}" type="text" name="place_of_work" placeholder="Place Of Work" maxlength="45" class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
+
+                                        <td class="p-3 px-5"><input value="{{ $client['position_at_work'] }}" type="text" name="position_at_work" placeholder="Position At Work" maxlength="45" class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
+
+                                        <td class="p-3 px-5"><input value="{{ $client['email'] }}" type="text" name="email" placeholder="Email" maxlength="255" class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
+                                        
+                                        <td class="p-3 px-5"><select name="registration_city" required class="bg-blue-100 border rounded px-3 py-2 mr-2 focus:outline-none focus:ring-0">
+                                            @foreach ($cities as $city)
+                                                <option value="{{ $city['id'] }}" {{ $client['registration_city']['id'] == $city['id'] ? 'selected' : '' }}>{{ $city['name'] }}</option>
+                                            @endforeach
+                                        </select></td>
+
+                                        <td class="p-3 px-5"><select name="marital_status" required class="bg-blue-100 border rounded px-3 py-2 mr-2 focus:outline-none focus:ring-0">
+                                            @foreach ($marital_statuses as $marital_status)
+                                                <option value="{{ $marital_status['id'] }}" {{ $client['marital_status']['id'] == $marital_status['id'] ? 'selected' : '' }}>{{ $marital_status['name'] }}</option>
+                                            @endforeach
+                                        </select></td>
+
+                                        <td class="p-3 px-5"><select name="citizenship" required class="bg-blue-100 border rounded px-3 py-2 mr-2 focus:outline-none focus:ring-0">
+                                            @foreach ($countries as $country)
+                                                <option value="{{ $country['id'] }}" {{ $client['citizenship']['id'] == $country['id'] ? 'selected' : '' }}>{{ $country['name'] }}</option>
+                                            @endforeach
+                                        </select></td>
+
+                                        <td class="p-3 px-5"><select name="disability" required class="bg-blue-100 border rounded px-3 py-2 mr-2 focus:outline-none focus:ring-0">
+                                            @foreach ($disabilities as $disability)
+                                                <option value="{{ $disability['id'] }}" {{ $client['disability']['id'] == $disability['id'] ? 'selected' : '' }}>{{ $disability['name'] }}</option>
+                                            @endforeach
+                                        </select></td>
+                                        
+                                        <td class="p-3 px-5"><input type="checkbox" id="pensioner" name="pensioner" value="1" {{ $client['pensioner'] == 1 ? 'checked' : '' }}></td>
+
+                                        <td class="p-3 px-5"><input value="{{ $client['monthly_income'] }}" type="number" id="monthly_income" name="monthly_income" step="100" min="0" class="bg-blue-100 border rounded px-3 py-2 mr-2 focus:outline-none focus:ring-0"></td>
+
+                                        <td class="bg-blue-100 p-3 px-5 text-blue-500 cursor-pointer">
                                             <button type="submit" class="bg-transparent border-none">
                                                 <i class="fas fa-check"></i>
                                             </button>
                                         </td>                    
                                     </form>   
-                                -->       
                                 </tr>                            
                             @endforeach
                         </tbody>
