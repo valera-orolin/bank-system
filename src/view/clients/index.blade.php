@@ -102,7 +102,7 @@
                                         @if ($key == 'pensioner')
                                             <td class="p-3 px-5">{{ $value == 1 ? 'Да' : 'Нет' }}</td>
                                         @elseif (is_array($value) && isset($value['url']) && isset($value['text']))
-                                            <td class="p-3 px-5"><a href="{{ $value['url'] }}" class="text-gray-500 hover:text-gray-900 hover:underline">{{ $value['text'] }}</a></td>
+                                            <td class="p-3 px-5 text-gray-500">{{ $value['text'] }}</td>
                                         @elseif (!is_array($value))
                                             <td class="p-3 px-5">{{ $value }}</td>
                                         @endif

@@ -1,5 +1,5 @@
 <?php
-require '../../model/db_functions.php';
+require '../../model/Client.php';
 require '../../vendor/autoload.php';
 
 $surname = trim($_POST['surname']) ?? null;
@@ -112,19 +112,19 @@ if (empty($disability)) {
     die();
 }
 
-$same_name = executeQuery("SELECT * FROM client WHERE surname = ? AND firstname = ? AND patronymic = ?", [$surname, $firstname, $patronymic]);
+$same_name = Client::findByName($surname, $firstname, $patronymic);
 if ($same_name) {
     echo "<script>alert('Failed to create a client. Client with such name already exists.'); window.location.href='/controller/clients/index.php';</script>";
     die();
 }
 
-$same_passport = executeQuery("SELECT * FROM client WHERE passport_series = ? AND passport_number = ?", [$passport_series, $passport_number]);
+$same_passport = Client::findByPassport($passport_series, $passport_number);
 if ($same_passport) {
     echo "<script>alert('Failed to create a client. Client with such passport already exists.'); window.location.href='/controller/clients/index.php';</script>";
     die();
 }
 
-$same_id_number = executeQuery("SELECT * FROM client WHERE id_number = ?", [$id_number]);
+$same_id_number = Client::findByIdNumber($id_number);
 if ($same_id_number) {
     echo "<script>alert('Failed to create a client. Client with such id number already exists.'); window.location.href='/controller/clients/index.php';</script>";
     die();
@@ -169,8 +169,6 @@ if (!empty($mobile_phone) && !preg_match('/^\d{6,9}$/', $mobile_phone)) {
 }
 
 
-$query = "INSERT INTO client (surname, firstname, patronymic, birth_date, gender, passport_series, passport_number, issued_by, issue_date, id_number, place_of_birth, city_of_residence, residence_address, home_phone, mobile_phone, place_of_work, position_at_work, email, registration_city, marital_status, citizenship, disability, pensioner, monthly_income) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
 $params = [
     $surname,
     $firstname,
@@ -199,7 +197,7 @@ $params = [
 ];
 
 try {
-    $executionResult = executeQuery($query, $params);
+    $executionResult = Client::store($params);
     if ($executionResult) {
         header("Location: /controller/clients/index.php");
     } else {

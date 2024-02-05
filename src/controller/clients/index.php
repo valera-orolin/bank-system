@@ -1,47 +1,39 @@
 <?php
-require '../../model/db_functions.php';
+require '../../model/Client.php';
 require '../../vendor/autoload.php';
 use Jenssegers\Blade\Blade;
 
-$query = "SELECT * FROM client ORDER BY surname";
-$params = [];
-
-$clients = executeQuery($query, $params);
+$clients = Client::all();
 
 foreach ($clients as &$client) {
-    $city_of_residence = executeQuery("SELECT name FROM city WHERE id = ?", [$client['city_of_residence']]);
     $client['city_of_residence'] = [
         'url' => '/',
         'id' => $client['city_of_residence'],
-        'text' => $city_of_residence[0]['name'],
+        'text' => Client::getCityName($client['city_of_residence']),
     ];
 
-    $registration_city = executeQuery("SELECT name FROM city WHERE id = ?", [$client['registration_city']]);
     $client['registration_city'] = [
         'url' => '/',
         'id' => $client['registration_city'],
-        'text' => $registration_city[0]['name'],
+        'text' => Client::getCityName($client['registration_city']),
     ];
 
-    $marital_status = executeQuery("SELECT name FROM marital_status WHERE id = ?", [$client['marital_status']]);
     $client['marital_status'] = [
         'url' => '/',
         'id' => $client['marital_status'],
-        'text' => $marital_status[0]['name'],
+        'text' => Client::getMaritalStatus($client['marital_status']),
     ];
 
-    $citizenship = executeQuery("SELECT name FROM country WHERE id = ?", [$client['citizenship']]);
     $client['citizenship'] = [
         'url' => '/',
         'id' => $client['citizenship'],
-        'text' => $citizenship[0]['name'],
+        'text' => Client::getCountryName($client['citizenship']),
     ];
 
-    $disability = executeQuery("SELECT name FROM disability WHERE id = ?", [$client['disability']]);
     $client['disability'] = [
         'url' => '/',
         'id' => $client['disability'],
-        'text' => $disability[0]['name'],
+        'text' => Client::getDisability($client['disability']),
     ];
 }
 

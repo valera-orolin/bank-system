@@ -1,5 +1,5 @@
 <?php
-require '../../model/db_functions.php';
+require '../../model/Client.php';
 require '../../vendor/autoload.php';
 
 $id = $_POST['id'];
@@ -113,19 +113,19 @@ if (empty($disability)) {
     die();
 }
 
-$same_name = executeQuery("SELECT * FROM client WHERE surname = ? AND firstname = ? AND patronymic = ? AND id != ?", [$surname, $firstname, $patronymic, $id]);
+$same_name = Client::findByNameExcludeId($surname, $firstname, $patronymic, $id);
 if ($same_name) {
     echo "<script>alert('Failed to update the client. Client with such name already exists.'); window.location.href='/controller/clients/index.php';</script>";
     die();
 }
 
-$same_passport = executeQuery("SELECT * FROM client WHERE passport_series = ? AND passport_number = ? AND id != ?", [$passport_series, $passport_number, $id]);
+$same_passport = Client::findByPassportExcludeId($passport_series, $passport_number, $id);
 if ($same_passport) {
     echo "<script>alert('Failed to update the client. Client with such passport already exists.'); window.location.href='/controller/clients/index.php';</script>";
     die();
 }
 
-$same_id_number = executeQuery("SELECT * FROM client WHERE id_number = ? AND id != ?", [$id_number, $id]);
+$same_id_number = Client::findByIdNumberExcludeId($id_number, $id);
 if ($same_id_number) {
     echo "<script>alert('Failed to update the client. Client with such id number already exists.'); window.location.href='/controller/clients/index.php';</script>";
     die();
@@ -196,12 +196,11 @@ $params = [
     $citizenship,
     $disability,
     $pensioner,
-    $monthly_income ?? null,
-    $id
+    $monthly_income ?? null
 ];
 
 try {
-    $executionResult = executeQuery($query, $params);
+    $executionResult = Client::update($params, $id);
     if ($executionResult) {
         header("Location: /controller/clients/index.php");
     } else {

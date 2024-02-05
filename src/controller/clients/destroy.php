@@ -1,14 +1,11 @@
 <?php
-require '../../model/db_functions.php';
+require '../../model/Client.php';
 require '../../vendor/autoload.php';
 
 $id = $_POST['id'];
 
-$query = "DELETE FROM client WHERE id = ?";
-$params = [$id];
-
 try {
-    $executionResult = executeQuery($query, $params);
+    $executionResult = Client::destroy($id);
     if ($executionResult) {
         header("Location: /controller/clients/index.php");
     } else {
