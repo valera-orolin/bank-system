@@ -1,5 +1,5 @@
 <?php
-require 'db_functions.php';
+require 'mysql/db_functions.php';
 
 class Country {
     public static function all() {

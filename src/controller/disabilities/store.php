@@ -1,5 +1,5 @@
 <?php
-require '../../model/db_functions.php';
+require '../../model/Disability.php';
 require '../../vendor/autoload.php';
 
 $name = trim($_POST['name']) ?? null;
@@ -9,15 +9,8 @@ if (empty($name)) {
     die();
 }
 
-
-$query = "INSERT INTO disability (name) VALUES (?)";
-
-$params = [
-    $name,
-];
-
 try {
-    $executionResult = executeQuery($query, $params);
+    $executionResult = Disability::store($name);
     if ($executionResult) {
         header("Location: /controller/disabilities/index.php");
     } else {

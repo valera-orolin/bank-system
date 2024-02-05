@@ -1,5 +1,5 @@
 <?php
-require 'db_functions.php';
+require 'mysql/db_functions.php';
 
 class Client {
     public static function all() {

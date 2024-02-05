@@ -1,5 +1,5 @@
 <?php
-require '../../model/db_functions.php';
+require '../../model/MaritalStatus.php';
 require '../../vendor/autoload.php';
 
 $name = trim($_POST['name']) ?? null;
@@ -9,15 +9,8 @@ if (empty($name)) {
     die();
 }
 
-
-$query = "INSERT INTO marital_status (name) VALUES (?)";
-
-$params = [
-    $name,
-];
-
 try {
-    $executionResult = executeQuery($query, $params);
+    $executionResult = MaritalStatus::store($name);
     if ($executionResult) {
         header("Location: /controller/marital_statuses/index.php");
     } else {

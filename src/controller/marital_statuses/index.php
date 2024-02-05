@@ -1,12 +1,9 @@
 <?php
-require '../../model/db_functions.php';
+require '../../model/MaritalStatus.php';
 require '../../vendor/autoload.php';
 use Jenssegers\Blade\Blade;
 
-$query = "SELECT * FROM marital_status";
-$params = [];
-
-$marital_statuses = executeQuery($query, $params);
+$marital_statuses = MaritalStatus::all();
 
 $blade = new Blade('../../view', '../../cache');
 echo $blade->make('marital_statuses.index', [

@@ -1,5 +1,5 @@
 <?php
-require '../../model/db_functions.php';
+require '../../model/Disability.php';
 require '../../vendor/autoload.php';
 
 $id = $_POST['id'];
@@ -10,16 +10,8 @@ if (empty($name)) {
     die();
 }
 
-
-$query = "UPDATE disability SET name = ? WHERE id = ?";
-
-$params = [
-    $name,
-    $id
-];
-
 try {
-    $executionResult = executeQuery($query, $params);
+    $executionResult = Disability::update($id, $name);
     if ($executionResult) {
         header("Location: /controller/disabilities/index.php");
     } else {

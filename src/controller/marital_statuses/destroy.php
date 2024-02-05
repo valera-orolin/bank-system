@@ -1,14 +1,11 @@
 <?php
-require '../../model/db_functions.php';
+require '../../model/MaritalStatus.php';
 require '../../vendor/autoload.php';
 
 $id = $_POST['id'];
 
-$query = "DELETE FROM marital_status WHERE id = ?";
-$params = [$id];
-
 try {
-    $executionResult = executeQuery($query, $params);
+    $executionResult = MaritalStatus::destroy($id);
     if ($executionResult) {
         header("Location: /controller/marital_statuses/index.php");
     } else {

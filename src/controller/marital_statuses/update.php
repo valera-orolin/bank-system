@@ -1,5 +1,5 @@
 <?php
-require '../../model/db_functions.php';
+require '../../model/MaritalStatus.php';
 require '../../vendor/autoload.php';
 
 $id = $_POST['id'];
@@ -10,16 +10,8 @@ if (empty($name)) {
     die();
 }
 
-
-$query = "UPDATE marital_status SET name = ? WHERE id = ?";
-
-$params = [
-    $name,
-    $id
-];
-
 try {
-    $executionResult = executeQuery($query, $params);
+    $executionResult = MaritalStatus::update($id, $name);
     if ($executionResult) {
         header("Location: /controller/marital_statuses/index.php");
     } else {

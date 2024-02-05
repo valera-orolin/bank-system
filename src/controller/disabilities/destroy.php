@@ -1,14 +1,11 @@
 <?php
-require '../../model/db_functions.php';
+require '../../model/Disability.php';
 require '../../vendor/autoload.php';
 
 $id = $_POST['id'];
 
-$query = "DELETE FROM disability WHERE id = ?";
-$params = [$id];
-
 try {
-    $executionResult = executeQuery($query, $params);
+    $executionResult = Disability::destroy($id);
     if ($executionResult) {
         header("Location: /controller/disabilities/index.php");
     } else {
