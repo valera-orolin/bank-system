@@ -37,11 +37,6 @@ foreach ($clients as &$client) {
     ];
 }
 
-$cities = executeQuery("SELECT * FROM city");
-$marital_statuses = executeQuery("SELECT * FROM marital_status");
-$countries = executeQuery("SELECT * FROM country");
-$disabilities = executeQuery("SELECT * FROM disability");
-
 $blade = new Blade('../../view', '../../cache');
 echo $blade->make('clients.index', [
     'clients' => $clients,

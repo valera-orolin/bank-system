@@ -168,7 +168,6 @@ if (!empty($mobile_phone) && !preg_match('/^\d{6,9}$/', $mobile_phone)) {
     die();
 }
 
-
 $params = [
     $surname,
     $firstname,

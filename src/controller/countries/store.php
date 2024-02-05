@@ -1,5 +1,5 @@
 <?php
-require '../../model/db_functions.php';
+require '../../model/Country.php';
 require '../../vendor/autoload.php';
 
 $name = trim($_POST['name']) ?? null;
@@ -9,15 +9,8 @@ if (empty($name)) {
     die();
 }
 
-
-$query = "INSERT INTO country (name) VALUES (?)";
-
-$params = [
-    $name,
-];
-
 try {
-    $executionResult = executeQuery($query, $params);
+    $executionResult = Country::store($name);
     if ($executionResult) {
         header("Location: /controller/countries/index.php");
     } else {

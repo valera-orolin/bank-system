@@ -1,5 +1,5 @@
 <?php
-require '../../model/db_functions.php';
+require '../../model/Country.php';
 require '../../vendor/autoload.php';
 
 $id = $_POST['id'];
@@ -10,16 +10,8 @@ if (empty($name)) {
     die();
 }
 
-
-$query = "UPDATE country SET name = ? WHERE id = ?";
-
-$params = [
-    $name,
-    $id
-];
-
 try {
-    $executionResult = executeQuery($query, $params);
+    $executionResult = Country::update($id, $name);
     if ($executionResult) {
         header("Location: /controller/countries/index.php");
     } else {

@@ -1,14 +1,11 @@
 <?php
-require '../../model/db_functions.php';
+require '../../model/Country.php';
 require '../../vendor/autoload.php';
 
 $id = $_POST['id'];
 
-$query = "DELETE FROM country WHERE id = ?";
-$params = [$id];
-
 try {
-    $executionResult = executeQuery($query, $params);
+    $executionResult = Country::destroy($id);
     if ($executionResult) {
         header("Location: /controller/countries/index.php");
     } else {
