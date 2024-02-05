@@ -1,5 +1,5 @@
 <?php
-require '../../model/db_functions.php';
+require '../../model/City.php';
 require '../../vendor/autoload.php';
 
 $id = $_POST['id'];
@@ -10,16 +10,8 @@ if (empty($name)) {
     die();
 }
 
-
-$query = "UPDATE city SET name = ? WHERE id = ?";
-
-$params = [
-    $name,
-    $id
-];
-
 try {
-    $executionResult = executeQuery($query, $params);
+    $executionResult = City::update($id, $name);
     if ($executionResult) {
         header("Location: /controller/cities/index.php");
     } else {

@@ -1,14 +1,11 @@
 <?php
-require '../../model/db_functions.php';
+require '../../model/City.php';
 require '../../vendor/autoload.php';
 
 $id = $_POST['id'];
 
-$query = "DELETE FROM city WHERE id = ?";
-$params = [$id];
-
 try {
-    $executionResult = executeQuery($query, $params);
+    $executionResult = City::destroy($id);
     if ($executionResult) {
         header("Location: /controller/cities/index.php");
     } else {

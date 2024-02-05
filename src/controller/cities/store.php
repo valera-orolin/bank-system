@@ -1,5 +1,5 @@
 <?php
-require '../../model/db_functions.php';
+require '../../model/City.php';
 require '../../vendor/autoload.php';
 
 $name = trim($_POST['name']) ?? null;
@@ -9,15 +9,8 @@ if (empty($name)) {
     die();
 }
 
-
-$query = "INSERT INTO city (name) VALUES (?)";
-
-$params = [
-    $name,
-];
-
 try {
-    $executionResult = executeQuery($query, $params);
+    $executionResult = City::store($name);
     if ($executionResult) {
         header("Location: /controller/cities/index.php");
     } else {
