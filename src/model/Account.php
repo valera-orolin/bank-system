@@ -29,18 +29,12 @@ class Account {
         return executeQuery($query);
     }
 
-    public static function getClientIdNumber($id) {
+    public static function getAccountNumber($id) {
         if ($id === null) {
             return null;
         }
-        $query = "SELECT id_number FROM client WHERE id = ?";
+        $query = "SELECT number FROM account WHERE id = ?";
         $result = executeQuery($query, [$id]);
-        return $result[0]['id_number'];
+        return $result[0]['number'];
     }
-
-    public static function getCurrencySymbol($id) {
-        $query = "SELECT symbol FROM currency WHERE id = ?";
-        $result = executeQuery($query, [$id]);
-        return $result[0]['symbol'];
-    }    
 }

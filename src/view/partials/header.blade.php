@@ -1,6 +1,7 @@
+<!--
 <div class="ml-8">
     <img src="https://bnb.by/upload/medialibrary/98f/98fe0ff126ec52f545b970ccefd27dec.png" alt="" class="h-12">
-</div>
+</div>-->
 <div class="text-center py-2">
     <a href="/controller/clients/index.php" class="inline-block px-4 py-2 hover:bg-black hover:text-white transition-all ease-in-out duration-300">Clients</a>
     <a href="/controller/cities/index.php" class="inline-block px-4 py-2 hover:bg-black hover:text-white transition-all ease-in-out duration-300">Cities</a>
@@ -10,7 +11,7 @@
 </div>
 <div class="text-center py-2">
     <a href="/controller/accounts/index.php" class="inline-block px-4 py-2 hover:bg-black hover:text-white transition-all ease-in-out duration-300">Accounts</a>
-    <a href="/controller/clients/index.php" class="inline-block px-4 py-2 hover:bg-black hover:text-white transition-all ease-in-out duration-300">Deposits</a>
+    <a href="/controller/deposits/index.php" class="inline-block px-4 py-2 hover:bg-black hover:text-white transition-all ease-in-out duration-300">Deposits</a>
     <a href="/controller/deposit_types/index.php" class="inline-block px-4 py-2 hover:bg-black hover:text-white transition-all ease-in-out duration-300">Deposit Types</a>
     <!--
     <a href="/controller/clients/index.php" class="inline-block px-4 py-2 hover:bg-black hover:text-white transition-all ease-in-out duration-300">Credits</a>

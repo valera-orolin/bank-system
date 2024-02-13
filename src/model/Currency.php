@@ -26,4 +26,10 @@ class Currency {
         $query = "DELETE FROM `bank`.`currency`";
         return executeQuery($query);
     }
+
+    public static function getCurrencySymbol($id) {
+        $query = "SELECT symbol FROM currency WHERE id = ?";
+        $result = executeQuery($query, [$id]);
+        return $result[0]['symbol'];
+    }    
 }

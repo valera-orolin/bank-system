@@ -11,12 +11,12 @@ foreach ($accounts as &$account) {
     $account['client'] = [
         'url' => '/',
         'id' => $account['client'],
-        'text' => Account::getClientIdNumber($account['client']),
+        'text' => Client::getClientIdNumber($account['client']),
     ];
     $account['currency'] = [
         'url' => '/',
         'id' => $account['currency'],
-        'text' => Account::getCurrencySymbol($account['currency']),
+        'text' => Currency::getCurrencySymbol($account['currency']),
     ];
 }
 

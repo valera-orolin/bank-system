@@ -10,7 +10,7 @@ foreach ($depositTypes as &$depositType) {
     $depositType['currency'] = [
         'url' => '/',
         'id' => $depositType['currency'],
-        'text' => DepositType::getCurrencySymbol($depositType['currency']),
+        'text' => Currency::getCurrencySymbol($depositType['currency']),
     ];
 }
 

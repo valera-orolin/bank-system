@@ -17,40 +17,32 @@
             </div>
 
             <div class="px-12 pb-10">
-                <div class="text-center text-5xl mb-8 font-bold">Accounts</div>
+                <div class="text-center text-5xl mb-8 font-bold">Deposits</div>
 
                 <!-- Create form -->
-                <form action="/controller/accounts/store.php" method="post" class="mb-4">
+                <form action="/controller/deposits/store.php" method="post" class="mb-4">
                     <div class="space-y-2">
-                        <input type="text" name="number" placeholder="Number" required maxlength="13" class="border rounded px-3 py-2 mr-2">
-                        <input type="text" name="code" placeholder="Code" required maxlength="4" class="border rounded px-3 py-2 mr-2">
-                        <label for="activity">Activity:</label>
-                        <select name="activity" required class="border rounded px-3 py-2 mr-2">
-                            <option value="active">active</option>
-                            <option value="passive">passive</option>
+                        <label for="deposit_type">Deposit Type:</label>
+                        <select name="deposit_type" required class="border rounded px-3 py-2 mr-2">
+                            @foreach ($depositTypes as $depositType)
+                                <option value="{{ $depositType['id'] }}">{{ $depositType['name'] }}</option>
+                            @endforeach
                         </select>
-                        <input type="text" name="debit" placeholder="Debit" required class="border rounded px-3 py-2 mr-2">
-                        <input type="text" name="credit" placeholder="Credit" required class="border rounded px-3 py-2 mr-2">
-                        <input type="text" name="balance" placeholder="Balance" required class="border rounded px-3 py-2 mr-2">
+                        <input type="date" name="start_date" placeholder="Start Date" required class="border rounded px-3 py-2 mr-2">
                         <label for="client">Client:</label>
-                        <select name="client" class="border rounded px-3 py-2 mr-2">
-                            <option value="">null</option>
+                        <select name="client" required class="border rounded px-3 py-2 mr-2">
                             @foreach ($clients as $client)
                                 <option value="{{ $client['id'] }}">{{ $client['id_number'] }}</option>
                             @endforeach
                         </select>
-                        <label for="currency">Currency:</label>
-                        <select name="currency" required class="border rounded px-3 py-2 mr-2">
-                            @foreach ($currencies as $currency)
-                                <option value="{{ $currency['id'] }}">{{ $currency['symbol'] }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" name="amount" placeholder="Amount" class="border rounded px-3 py-2 mr-2">
                     </div>
                     <input type="submit" value="Create New" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
-                </form>
+                </form>                             
                 
 
                 <!-- Table -->
+                <!--
                 <div class="overflow-x-auto w-full">
                     <table class="w-full text-md bg-white shadow-md rounded mb-4">
                         <thead>
@@ -76,7 +68,7 @@
                                     @endforeach
                                     <td><button class="edit-button text-green-500 p-3 px-5"><i class="fas fa-edit"></i></button></td>
                 
-                                    <!-- Delete form -->
+                                    <!-- Delete form -- >
                                     <td class="text-red-500 p-3 px-5">
                                         <form id="delete-form-{{ $account['id'] }}" action="/controller/accounts/destroy.php" method="post" onsubmit="return confirm('Are you sure you want to delete this record?');">
                                             <input type="hidden" name="id" value="{{ $account['id'] }}">
@@ -87,7 +79,7 @@
                                     </td>                             
                                 </tr>
 
-                                <!-- Update form -->
+                                <!-- Update form -- >
                                 <tr class="border-b hidden bg-blue-100">
                                     <form id="edit-form-{{ $account['id'] }}" action="/controller/accounts/update.php" method="post">
                                         <td class="p-3 px-5">
@@ -140,6 +132,7 @@
                         </tbody>
                     </table>
                 </div>
+            -->
             </div>
         </div>
     </div>

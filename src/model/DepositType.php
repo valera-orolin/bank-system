@@ -27,9 +27,21 @@ class DepositType {
         return executeQuery($query);
     }
 
-    public static function getCurrencySymbol($id) {
-        $query = "SELECT symbol FROM currency WHERE id = ?";
+    public static function getDepositTypeName($id) {
+        if ($id === null) {
+            return null;
+        }
+        $query = "SELECT name FROM deposit_type WHERE id = ?";
         $result = executeQuery($query, [$id]);
-        return $result[0]['symbol'];
-    }    
+        return $result[0]['name'];
+    }
+
+    public static function getCurrency($id) {
+        if ($id === null) {
+            return null;
+        }
+        $query = "SELECT currency FROM deposit_type WHERE id = ?";
+        $result = executeQuery($query, [$id]);
+        return $result[0]['currency'];
+    }
 }

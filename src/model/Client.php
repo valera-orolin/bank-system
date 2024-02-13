@@ -31,6 +31,15 @@ class Client {
         return $result[0]['name'];
     }
 
+    public static function getClientIdNumber($id) {
+        if ($id === null) {
+            return null;
+        }
+        $query = "SELECT id_number FROM client WHERE id = ?";
+        $result = executeQuery($query, [$id]);
+        return $result[0]['id_number'];
+    }
+
     public static function destroy($id) {
         $query = "DELETE FROM client WHERE id = ?";
         return executeQuery($query, [$id]);

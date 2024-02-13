@@ -17,7 +17,7 @@
             </div>
 
             <div class="px-12 pb-10">
-                <div class="text-center text-5xl mb-8 font-bold">Deposit Type</div>
+                <div class="text-center text-5xl mb-8 font-bold">Deposit Types</div>
 
                 <!-- Create form -->
                 <form action="/controller/deposit_types/store.php" method="post" class="mb-4">
