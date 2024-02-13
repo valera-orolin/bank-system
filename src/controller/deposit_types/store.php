@@ -15,6 +15,16 @@ if (empty($name) || empty($rate) || empty($currency) || empty($min_amount) || em
     die();
 }
 
+if ($min_amount < 0 || $max_amount < 0) {
+    echo "<script>alert('Failed to create a deposit type. Minimal and maximal amounts must be positive numbers.'); window.location.href='/controller/deposit_types/index.php';</script>";
+    die();
+}
+
+if ($min_amount >= $max_amount) {
+    echo "<script>alert('Failed to create a deposit type. Maximal amount must be greater than minimal.'); window.location.href='/controller/deposit_types/index.php';</script>";
+    die();
+}
+
 try {
     $executionResult = DepositType::store($name, $rate, $currency, $min_amount, $max_amount, $period, $revocation);
     if ($executionResult) {

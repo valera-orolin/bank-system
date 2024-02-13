@@ -23,7 +23,7 @@
                             <input type="submit" value="Close The Banking Day" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
                         </form>
 
-                        <form action="/controller/cities/store.php" onsubmit="return confirm('Are you sure you want to clear all accounts?');" method="post" class="mb-4">
+                        <form action="/controller/accounts/clear.php" onsubmit="return confirm('Are you sure you want to clear all accounts?');" method="post" class="mb-4">
                             <input type="submit" value="Сlear Accounts" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
                         </form>
 

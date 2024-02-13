@@ -9,7 +9,7 @@
     <a href="/controller/disabilities/index.php" class="inline-block px-4 py-2 hover:bg-black hover:text-white transition-all ease-in-out duration-300">Disabilities</a>
 </div>
 <div class="text-center py-2">
-    <a href="/controller/clients/index.php" class="inline-block px-4 py-2 hover:bg-black hover:text-white transition-all ease-in-out duration-300">Accounts</a>
+    <a href="/controller/accounts/index.php" class="inline-block px-4 py-2 hover:bg-black hover:text-white transition-all ease-in-out duration-300">Accounts</a>
     <a href="/controller/clients/index.php" class="inline-block px-4 py-2 hover:bg-black hover:text-white transition-all ease-in-out duration-300">Deposits</a>
     <a href="/controller/deposit_types/index.php" class="inline-block px-4 py-2 hover:bg-black hover:text-white transition-all ease-in-out duration-300">Deposit Types</a>
     <!--
