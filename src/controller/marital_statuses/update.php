@@ -6,7 +6,7 @@ $id = $_POST['id'];
 $name = trim($_POST['name']) ?? null;
 
 if (empty($name)) {
-    echo "<script>alert('Failed to create a marital status. Name cannot be empty.'); window.location.href='/controller/marital_statuses/index.php';</script>";
+    echo "<script>alert('Failed to update a marital status. Name cannot be empty.'); window.location.href='/controller/marital_statuses/index.php';</script>";
     die();
 }
 

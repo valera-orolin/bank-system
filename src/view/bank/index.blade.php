@@ -31,6 +31,10 @@
                             <input type="submit" value="Clear Deposits" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
                         </form>
 
+                        <form action="/controller/deposit_types/clear.php" onsubmit="return confirm('Are you sure you want to clear all deposit types?');" method="post" class="mb-4">
+                            <input type="submit" value="Clear Deposit Types" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
+                        </form>
+
                         <form action="/controller/currencies/clear.php" onsubmit="return confirm('Are you sure you want to clear all currencies?');" method="post" class="mb-4">
                             <input type="submit" value="Clear Currencies" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
                         </form>
@@ -40,7 +44,7 @@
                         </form>
 
                         <form action="/controller/cities/store.php" onsubmit="return confirm('Are you sure you want to restart all of the bank system?');" method="post" class="mb-4">
-                            <input type="submit" value="Clear Everything" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
+                            <input type="submit" value="Restart System" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
                         </form>
                     </div>
                 </div>

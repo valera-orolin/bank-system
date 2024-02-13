@@ -6,7 +6,7 @@ $id = $_POST['id'];
 $name = trim($_POST['name']) ?? null;
 
 if (empty($name)) {
-    echo "<script>alert('Failed to create a disability. Name cannot be empty.'); window.location.href='/controller/disabilities/index.php';</script>";
+    echo "<script>alert('Failed to update a disability. Name cannot be empty.'); window.location.href='/controller/disabilities/index.php';</script>";
     die();
 }
 
