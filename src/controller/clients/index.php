@@ -1,5 +1,9 @@
 <?php
 require '../../model/Client.php';
+require '../../model/MaritalStatus.php';
+require '../../model/City.php';
+require '../../model/Disability.php';
+require '../../model/Country.php';
 require '../../vendor/autoload.php';
 use Jenssegers\Blade\Blade;
 
@@ -36,6 +40,11 @@ foreach ($clients as &$client) {
         'text' => Client::getDisability($client['disability']),
     ];
 }
+
+$cities = City::all();
+$marital_statuses = MaritalStatus::all();
+$countries = Country::all();
+$disabilities = Disability::all();
 
 $blade = new Blade('../../view', '../../cache');
 echo $blade->make('clients.index', [

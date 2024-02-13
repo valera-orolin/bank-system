@@ -70,13 +70,13 @@
                             @endforeach
                         </select>
                         <label for="disability">Disability:</label>
-                        <select name="disability" required class="border rounded px-3 py-2 mr-2">
+                        <select name="citizenship" required class="border rounded px-3 py-2 mr-2">
                             @foreach ($disabilities as $disability)
                                 <option value="{{ $disability['id'] }}">{{ $disability['name'] }}</option>
                             @endforeach
                         </select>
                         <label for="pensioner">Pensioner:</label>
-                        <input type="checkbox" id="pensioner" name="pensioner" value="1" class="border rounded px-3 py-2 mr-2">
+                        <input type="checkbox" id="pensioner" name="pensioner" value="1">
                         <label for="monthly_income">Monthly Income:</label>
                         <input type="number" id="monthly_income" name="monthly_income" step="100" min="0" class="border rounded px-3 py-2 mr-2">
                     </div>
