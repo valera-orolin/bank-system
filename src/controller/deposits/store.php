@@ -1,6 +1,7 @@
 <?php
 require '../../model/Deposit.php';
 require '../../model/Account.php';
+require '../../model/Currency.php';
 require '../../model/DepositType.php';
 require '../../vendor/autoload.php';
 
@@ -23,13 +24,12 @@ if ($amount < 0) {
 }
 
 try {
-    // Get currency, revocation, and amount range from deposit_type
     $currency = DepositType::getCurrency($deposit_type);
     $revocation = DepositType::getRevocation($deposit_type);
-    $amountRange = DepositType::getAmountRange($deposit_type);
+    $minAmount = DepositType::getMinAmount($deposit_type);
 
-    if ($amount < $amountRange['min_amount'] || $amount > $amountRange['max_amount']) {
-        echo "<script>alert('Failed to create a deposit. Amount must be between {$amountRange['min_amount']} and {$amountRange['max_amount']}'); window.location.href='/controller/deposits/index.php';</script>";
+    if ($amount < $minAmount) {
+        echo "<script>alert('Failed to create a deposit. Amount must be more than {$minAmount}'); window.location.href='/controller/deposits/index.php';</script>";
         die();
     }
 
@@ -39,8 +39,12 @@ try {
     $bank_development_fund = Account::getIdByNumber('0000000000002');
 
     Account::deposit($bank_cash_desk, $amount);
-    Account::transfer($bank_cash_desk, $current_account, $amount);
-    Account::transfer($current_account, $bank_development_fund, $amount);
+    Account::withdraw($bank_cash_desk, $amount);
+    Account::deposit($current_account, $amount / Currency::getExchangeRate($currency));
+    Account::withdraw($current_account, $amount / Currency::getExchangeRate($currency));
+    Account::deposit($bank_development_fund, $amount);
+    //Account::transfer($bank_cash_desk, $current_account, $amount);
+    //Account::transfer($current_account, $bank_development_fund, $amount);
 
     // Create deposit
     $executionResult = Deposit::store($deposit_type, $start_date, $client, $current_account, $interest_account, $amount);

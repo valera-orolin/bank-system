@@ -31,7 +31,6 @@
                             @endforeach
                         </select>
                         <input type="text" name="min_amount" placeholder="Minimum Amount" required class="border rounded px-3 py-2 mr-2">
-                        <input type="text" name="max_amount" placeholder="Maximum Amount" required class="border rounded px-3 py-2 mr-2">
                         <input type="text" name="period" placeholder="Period" required class="border rounded px-3 py-2 mr-2">
                         <label for="revocation">Revocation:</label>
                         <select name="revocation" required class="border rounded px-3 py-2 mr-2">
@@ -98,9 +97,7 @@
                                         </td>
 
                                         <td class="p-3 px-5"><input value="{{ $deposit_type['min_amount'] }}" type="text" name="min_amount" placeholder="Minimum Amount" required class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
-
-                                        <td class="p-3 px-5"><input value="{{ $deposit_type['max_amount'] }}" type="text" name="max_amount" placeholder="Maximum Amount" required class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
-
+                                        
                                         <td class="p-3 px-5"><input value="{{ $deposit_type['period'] }}" type="text" name="period" placeholder="Period" required class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
 
                                         <!-- Revocation select -->

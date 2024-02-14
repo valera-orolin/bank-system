@@ -1,5 +1,6 @@
 <?php
 require_once 'mysql/db_functions.php';
+//require_once 'Currency.php';
 
 class Account {
     public static function all() {
@@ -96,10 +97,25 @@ class Account {
         return self::updateAccount($id, $account);
     }
 
+    /*
     public static function transfer($fromId, $toId, $amount) {
+        $fromAccount = self::find($fromId);
+        $toAccount = self::find($toId);
+
+        // Get the exchange rates of the two accounts
+        $fromExchangeRate = self::getExchangeRate($fromAccount['currency']);
+        $toExchangeRate = self::getExchangeRate($toAccount['currency']);
+
+        // Convert the amount to the base currency (with id 1)
+        $baseAmount = $amount * $fromExchangeRate;
+
+        // Convert the base amount to the target currency
+        $convertedAmount = $baseAmount / $toExchangeRate;
+
         self::withdraw($fromId, $amount);
-        self::deposit($toId, $amount);
+        self::deposit($toId, $convertedAmount);
     }
+    */
 
     private static function find($id) {
         if ($id === null) {

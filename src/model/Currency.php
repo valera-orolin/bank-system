@@ -31,5 +31,14 @@ class Currency {
         $query = "SELECT symbol FROM currency WHERE id = ?";
         $result = executeQuery($query, [$id]);
         return $result[0]['symbol'];
-    }    
+    } 
+    
+    public static function getExchangeRate($id) {
+        if ($id === null) {
+            return null;
+        }
+        $query = "SELECT exchange_rate FROM currency WHERE id = ?";
+        $result = executeQuery($query, [$id]);
+        return $result[0]['exchange_rate'];
+    }
 }
