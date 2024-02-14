@@ -37,4 +37,81 @@ class Account {
         $result = executeQuery($query, [$id]);
         return $result[0]['number'];
     }
+
+    public static function getIdByNumber($number) {
+        if ($number === null) {
+            return null;
+        }
+        $query = "SELECT id FROM account WHERE number = ?";
+        $result = executeQuery($query, [$number]);
+        return $result[0]['id'];
+    }
+
+    public static function createCurrentAccount($client, $currency, $revocation) {
+        $current_account_number = substr(str_shuffle(str_repeat($x='0123456789', ceil(13/strlen($x)) )),1,13);
+        $current_account_code = $revocation == 'revocable' ? '3014' : '3414';
+        $current_account_activity = "passive";
+        $current_account_debit = 0;
+        $current_account_credit = 0;
+        $current_account_balance = 0;
+
+        self::store($current_account_number, $current_account_code, $current_account_activity, $current_account_debit, $current_account_credit, $current_account_balance, $client, $currency);
+        return self::getIdByNumber($current_account_number);
+    }
+
+    public static function createInterestAccount($client, $currency, $revocation) {
+        $interest_account_number = substr(str_shuffle(str_repeat($x='0123456789', ceil(13/strlen($x)) )),1,13);
+        $interest_account_code = $revocation == 'revocable' ? '3071' : '3471';
+        $interest_account_activity = "passive";
+        $interest_account_debit = 0;
+        $interest_account_credit = 0;
+        $interest_account_balance = 0;
+
+        self::store($interest_account_number, $interest_account_code, $interest_account_activity, $interest_account_debit, $interest_account_credit, $interest_account_balance, $client, $currency);
+        return self::getIdByNumber($interest_account_number);
+    }
+
+    public static function deposit($id, $amount) {
+        $account = self::find($id);
+        $account['balance'] += $amount;
+        if ($account['activity'] == 'active') {
+            $account['debit'] += $amount;
+        } else {
+            $account['credit'] += $amount;
+        }
+        return self::updateAccount($id, $account);
+    }
+
+    public static function withdraw($id, $amount) {
+        $account = self::find($id);
+        if ($account['balance'] < $amount) {
+            throw new Exception("Insufficient balance");
+        }
+        $account['balance'] -= $amount;
+        if ($account['activity'] == 'active') {
+            $account['credit'] += $amount;
+        } else {
+            $account['debit'] += $amount;
+        }
+        return self::updateAccount($id, $account);
+    }
+
+    public static function transfer($fromId, $toId, $amount) {
+        self::withdraw($fromId, $amount);
+        self::deposit($toId, $amount);
+    }
+
+    private static function find($id) {
+        if ($id === null) {
+            return null;
+        }
+        $query = "SELECT * FROM account WHERE id = ?";
+        $result = executeQuery($query, [$id]);
+        return $result[0];
+    }
+
+    private static function updateAccount($id, $account) {
+        $query = "UPDATE account SET number = ?, code = ?, activity = ?, debit = ?, credit = ?, balance = ?, client = ?, currency = ? WHERE id = ?";
+        return executeQuery($query, [$account['number'], $account['code'], $account['activity'], $account['debit'], $account['credit'], $account['balance'], $account['client'], $account['currency'], $id]);
+    }
 }

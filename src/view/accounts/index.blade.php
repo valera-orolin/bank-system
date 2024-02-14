@@ -20,7 +20,7 @@
                 <div class="text-center text-5xl mb-8 font-bold">Accounts</div>
 
                 <!-- Create form -->
-                <form action="/controller/accounts/store.php" method="post" class="mb-4">
+                <form action="/controller/accounts/store.php" onsubmit="return confirm('ATTENTION! YOU ARE TRYING TO TAMPER WITH SENSITIVE DATA!');" method="post" class="mb-4">
                     <div class="space-y-2">
                         <input type="text" name="number" placeholder="Number" required maxlength="13" class="border rounded px-3 py-2 mr-2">
                         <input type="text" name="code" placeholder="Code" required maxlength="4" class="border rounded px-3 py-2 mr-2">
@@ -78,7 +78,7 @@
                 
                                     <!-- Delete form -->
                                     <td class="text-red-500 p-3 px-5">
-                                        <form id="delete-form-{{ $account['id'] }}" action="/controller/accounts/destroy.php" method="post" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                                        <form id="delete-form-{{ $account['id'] }}" action="/controller/accounts/destroy.php" method="post" onsubmit="return confirm('ATTENTION! YOU ARE TRYING TO TAMPER WITH SENSITIVE DATA! Are you sure you want to delete this record?');">
                                             <input type="hidden" name="id" value="{{ $account['id'] }}">
                                             <button type="submit" class="bg-transparent border-none">
                                                 <i class="fas fa-trash"></i>
@@ -89,7 +89,7 @@
 
                                 <!-- Update form -->
                                 <tr class="border-b hidden bg-blue-100">
-                                    <form id="edit-form-{{ $account['id'] }}" action="/controller/accounts/update.php" method="post">
+                                    <form id="edit-form-{{ $account['id'] }}" action="/controller/accounts/update.php" onsubmit="return confirm('ATTENTION! YOU ARE TRYING TO TAMPER WITH SENSITIVE DATA!');" method="post">
                                         <td class="p-3 px-5">
                                             <input type="hidden" name="id" value="{{ $account['id'] }}" class="border-none focus:outline-none focus:ring-0">
                                         </td>

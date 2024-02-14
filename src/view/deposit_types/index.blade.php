@@ -79,7 +79,7 @@
 
                                 <!-- Update form -->
                                 <tr class="border-b hidden bg-blue-100">
-                                    <form id="edit-form-{{ $deposit_type['id'] }}" action="/controller/deposit_types/update.php" method="post">
+                                    <form id="edit-form-{{ $deposit_type['id'] }}" action="/controller/deposit_types/update.php" onsubmit="return confirm('ATTENTION! YOU ARE TRYING TO TAMPER WITH SENSITIVE DATA!');" method="post">
                                         <td class="p-3 px-5">
                                             <input type="hidden" name="id" value="{{ $deposit_type['id'] }}" class="border-none focus:outline-none focus:ring-0">
                                         </td>

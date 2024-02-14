@@ -19,16 +19,26 @@ foreach ($deposits as &$deposit) {
         'id' => $deposit['deposit_type'],
         'text' => DepositType::getDepositTypeName($deposit['deposit_type']),
     ];
+    $deposit['current_account'] = [
+        'url' => '/',
+        'id' => $deposit['current_account'],
+        'text' => Account::getAccountNumber($deposit['current_account']),
+    ];
+    $deposit['interest_account'] = [
+        'url' => '/',
+        'id' => $deposit['interest_account'],
+        'text' => Account::getAccountNumber($deposit['interest_account']),
+    ];
 }
 
 $clients = Client::all();
 $depositTypes = DepositType::all();
-$currentAccounts = Account::all();
-$interestAccounts = Account::all();
+$accounts = Account::all();
 
 $blade = new Blade('../../view', '../../cache');
 echo $blade->make('deposits.index', [
     'deposits' => $deposits,
     'clients' => $clients,
+    'accounts' => $accounts,
     'depositTypes' => $depositTypes,
 ])->render();

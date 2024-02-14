@@ -44,4 +44,22 @@ class DepositType {
         $result = executeQuery($query, [$id]);
         return $result[0]['currency'];
     }
+
+    public static function getRevocation($id) {
+        if ($id === null) {
+            return null;
+        }
+        $query = "SELECT revocation FROM deposit_type WHERE id = ?";
+        $result = executeQuery($query, [$id]);
+        return $result[0]['revocation'];
+    }
+
+    public static function getAmountRange($id) {
+        if ($id === null) {
+            return null;
+        }
+        $query = "SELECT min_amount, max_amount FROM deposit_type WHERE id = ?";
+        $result = executeQuery($query, [$id]);
+        return $result[0];
+    }
 }

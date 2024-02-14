@@ -23,28 +23,24 @@ if ($amount < 0) {
 }
 
 try {
-    // Get currency from deposit_type
+    // Get currency, revocation, and amount range from deposit_type
     $currency = DepositType::getCurrency($deposit_type);
+    $revocation = DepositType::getRevocation($deposit_type);
+    $amountRange = DepositType::getAmountRange($deposit_type);
 
-    // Create current_account
-    $current_account_number = substr(str_shuffle(str_repeat($x='0123456789', ceil(13/strlen($x)) )),1,13);
-    $current_account_code = "3014";
-    $current_account_activity = "passive";
-    $current_account_debit = 0;
-    $current_account_credit = 0;
-    $current_account_balance = 0;
+    if ($amount < $amountRange['min_amount'] || $amount > $amountRange['max_amount']) {
+        echo "<script>alert('Failed to create a deposit. Amount must be between {$amountRange['min_amount']} and {$amountRange['max_amount']}'); window.location.href='/controller/deposits/index.php';</script>";
+        die();
+    }
 
-    $current_account = Account::store($current_account_number, $current_account_code, $current_account_activity, $current_account_debit, $current_account_credit, $current_account_balance, $client, $currency);
+    $current_account = Account::createCurrentAccount($client, $currency, $revocation);
+    $interest_account = Account::createInterestAccount($client, $currency, $revocation);
+    $bank_cash_desk = Account::getIdByNumber('0000000000001');
+    $bank_development_fund = Account::getIdByNumber('0000000000002');
 
-    // Create interest_account
-    $interest_account_number = substr(str_shuffle(str_repeat($x='0123456789', ceil(13/strlen($x)) )),1,13);
-    $interest_account_code = "3015";
-    $interest_account_activity = "passive";
-    $interest_account_debit = 0;
-    $interest_account_credit = 0;
-    $interest_account_balance = 0;
-
-    $interest_account = Account::store($interest_account_number, $interest_account_code, $interest_account_activity, $interest_account_debit, $interest_account_credit, $interest_account_balance, $client, $currency);
+    Account::deposit($bank_cash_desk, $amount);
+    Account::transfer($bank_cash_desk, $current_account, $amount);
+    Account::transfer($current_account, $bank_development_fund, $amount);
 
     // Create deposit
     $executionResult = Deposit::store($deposit_type, $start_date, $client, $current_account, $interest_account, $amount);

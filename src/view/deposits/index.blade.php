@@ -42,22 +42,21 @@
                 
 
                 <!-- Table -->
-                <!--
                 <div class="overflow-x-auto w-full">
                     <table class="w-full text-md bg-white shadow-md rounded mb-4">
                         <thead>
                             <tr class="border-b">
-                                @if (isset($accounts[0]))
-                                    @foreach ($accounts[0] as $key => $value)
+                                @if (isset($deposits[0]))
+                                    @foreach ($deposits[0] as $key => $value)
                                         <th class="text-left p-3 px-5">{{ $key }}</th>
                                     @endforeach
                                 @endif
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($accounts as $account)
+                            @foreach ($deposits as $deposit)
                                 <tr class="border-b hover:bg-orange-100">
-                                    @foreach ($account as $key => $value)
+                                    @foreach ($deposit as $key => $value)
                                         @if ($key == 'client' && $value['text'] == null)
                                             <td class="p-3 px-5 text-gray-500">null</td>
                                         @elseif (is_array($value) && isset($value['url']) && isset($value['text']))
@@ -68,10 +67,10 @@
                                     @endforeach
                                     <td><button class="edit-button text-green-500 p-3 px-5"><i class="fas fa-edit"></i></button></td>
                 
-                                    <!-- Delete form -- >
+                                    <!-- Delete form -->
                                     <td class="text-red-500 p-3 px-5">
-                                        <form id="delete-form-{{ $account['id'] }}" action="/controller/accounts/destroy.php" method="post" onsubmit="return confirm('Are you sure you want to delete this record?');">
-                                            <input type="hidden" name="id" value="{{ $account['id'] }}">
+                                        <form id="delete-form-{{ $deposit['id'] }}" action="/controller/deposits/destroy.php" method="post" onsubmit="return confirm('ATTENTION! YOU ARE TRYING TO TAMPER WITH SENSITIVE DATA! Are you sure you want to delete this record?');">
+                                            <input type="hidden" name="id" value="{{ $deposit['id'] }}">
                                             <button type="submit" class="bg-transparent border-none">
                                                 <i class="fas fa-trash"></i>
                                             </button>
@@ -79,47 +78,49 @@
                                     </td>                             
                                 </tr>
 
-                                <!-- Update form -- >
+                                <!-- Update form -->
                                 <tr class="border-b hidden bg-blue-100">
-                                    <form id="edit-form-{{ $account['id'] }}" action="/controller/accounts/update.php" method="post">
+                                    <form id="edit-form-{{ $deposit['id'] }}" action="/controller/deposits/update.php" onsubmit="return confirm('ATTENTION! YOU ARE TRYING TO TAMPER WITH SENSITIVE DATA!');" method="post">
                                         <td class="p-3 px-5">
-                                            <input type="hidden" name="id" value="{{ $account['id'] }}" class="border-none focus:outline-none focus:ring-0">
+                                            <input type="hidden" name="id" value="{{ $deposit['id'] }}" class="border-none focus:outline-none focus:ring-0">
                                         </td>
-                                
-                                        <td class="p-3 px-5"><input value="{{ $account['number'] }}" type="text" name="number" placeholder="Number" required maxlength="13" class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
-                                
-                                        <td class="p-3 px-5"><input value="{{ $account['code'] }}" type="text" name="code" placeholder="Code" required maxlength="4" class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
-                                
+
                                         <td class="p-3 px-5">
-                                            <select name="activity" required class="bg-blue-100 border rounded px-3 py-2 mr-2 focus:outline-none focus:ring-0">
-                                                <option value="active" {{ $account['activity'] == 'active' ? 'selected' : '' }}>active</option>
-                                                <option value="passive" {{ $account['activity'] == 'passive' ? 'selected' : '' }}>passive</option>
+                                            <select name="deposit_type" required class="bg-blue-100 border rounded px-3 py-2 mr-2 focus:outline-none focus:ring-0">
+                                                @foreach ($depositTypes as $depositType)
+                                                    <option value="{{ $depositType['id'] }}" {{ $deposit['deposit_type']['id'] == $depositType['id'] ? 'selected' : '' }}>{{ $depositType['name'] }}</option>
+                                                @endforeach
                                             </select>
                                         </td>
-                                
-                                        <td class="p-3 px-5"><input value="{{ $account['debit'] }}" type="text" name="debit" placeholder="Debit" required class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
-                                
-                                        <td class="p-3 px-5"><input value="{{ $account['credit'] }}" type="text" name="credit" placeholder="Credit" required class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
-                                
-                                        <td class="p-3 px-5"><input value="{{ $account['balance'] }}" type="text" name="balance" placeholder="Balance" required class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
-                                
+
+                                        <td class="p-3 px-5"><input value="{{ $deposit['start_date'] }}" type="date" name="start_date" placeholder="Start Date" required class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
+
                                         <td class="p-3 px-5">
-                                            <select name="client" class="bg-blue-100 border rounded px-3 py-2 mr-2 focus:outline-none focus:ring-0">
-                                                <option value="">null</option>
+                                            <select name="client" required class="bg-blue-100 border rounded px-3 py-2 mr-2 focus:outline-none focus:ring-0">
                                                 @foreach ($clients as $client)
-                                                    <option value="{{ $client['id'] }}" {{ $account['client']['id'] == $client['id'] ? 'selected' : '' }}>{{ $client['id_number'] }}</option>
+                                                    <option value="{{ $client['id'] }}" {{ $deposit['client']['id'] == $client['id'] ? 'selected' : '' }}>{{ $client['id_number'] }}</option>
                                                 @endforeach
                                             </select>
                                         </td>
-                                
+
                                         <td class="p-3 px-5">
-                                            <select name="currency" required class="bg-blue-100 border rounded px-3 py-2 mr-2 focus:outline-none focus:ring-0">
-                                                @foreach ($currencies as $currency)
-                                                    <option value="{{ $currency['id'] }}" {{ $account['currency']['id'] == $currency['id'] ? 'selected' : '' }}>{{ $currency['symbol'] }}</option>
+                                            <select name="current_account" required class="bg-blue-100 border rounded px-3 py-2 mr-2 focus:outline-none focus:ring-0">
+                                                @foreach ($accounts as $account)
+                                                    <option value="{{ $account['id'] }}" {{ $deposit['current_account']['id'] == $account['id'] ? 'selected' : '' }}>{{ $account['number'] }}</option>
                                                 @endforeach
                                             </select>
                                         </td>
-                                
+
+                                        <td class="p-3 px-5">
+                                            <select name="interest_account" required class="bg-blue-100 border rounded px-3 py-2 mr-2 focus:outline-none focus:ring-0">
+                                                @foreach ($accounts as $account)
+                                                    <option value="{{ $account['id'] }}" {{ $deposit['interest_account']['id'] == $account['id'] ? 'selected' : '' }}>{{ $account['number'] }}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+
+                                        <td class="p-3 px-5"><input value="{{ $deposit['amount'] }}" type="text" name="amount" placeholder="Amount" class="bg-blue-100 border-none focus:outline-none focus:ring-0"></td>
+
                                         <td class="bg-blue-100 p-3 px-5 text-blue-500 cursor-pointer">
                                             <button type="submit" class="bg-transparent border-none">
                                                 <i class="fas fa-check"></i>
@@ -127,12 +128,11 @@
                                         </td>       
                                         <td class="p-3 px-5"></td>             
                                     </form>
-                                </tr>                                        
+                                </tr>    
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-            -->
             </div>
         </div>
     </div>
