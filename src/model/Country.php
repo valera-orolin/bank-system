@@ -1,7 +1,8 @@
 <?php
 require_once 'mysql/db_functions.php';
 
-class Country {
+class Country 
+{
     public static function all() {
         $query = "SELECT * FROM country";
         return executeQuery($query);

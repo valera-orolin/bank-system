@@ -1,9 +1,9 @@
 <?php
-require '../../model/City.php';
 require '../../model/CurrentDate.php';
 require '../../vendor/autoload.php';
 use Jenssegers\Blade\Blade;
 
+CurrentDate::setCurrentDate('2024-02-13');
 
 $blade = new Blade('../../view', '../../cache');
 echo $blade->make('bank.index', [

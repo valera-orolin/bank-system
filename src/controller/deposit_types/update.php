@@ -21,7 +21,7 @@ if ($min_amount <= 0) {
 }
 
 try {
-    $executionResult = DepositType::update($id, $name, $rate, $currency, $min_amount, $max_amount, $period, $revocation);
+    $executionResult = DepositType::update($id, $name, $rate, $currency, $min_amount, $period, $revocation);
     if ($executionResult) {
         header("Location: /controller/deposit_types/index.php");
     } else {

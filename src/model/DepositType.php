@@ -1,7 +1,8 @@
 <?php
 require_once 'mysql/db_functions.php';
 
-class DepositType {
+class DepositType 
+{
     public static function all() {
         $query = "SELECT * FROM deposit_type";
         return executeQuery($query);

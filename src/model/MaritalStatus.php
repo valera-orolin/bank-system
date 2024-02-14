@@ -1,7 +1,8 @@
 <?php
 require_once 'mysql/db_functions.php';
 
-class MaritalStatus {
+class MaritalStatus 
+{
     public static function all() {
         $query = "SELECT * FROM marital_status";
         return executeQuery($query);

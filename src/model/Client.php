@@ -1,7 +1,8 @@
 <?php
 require_once 'mysql/db_functions.php';
 
-class Client {
+class Client 
+{
     public static function all() {
         $query = "SELECT * FROM client ORDER BY surname";
         return executeQuery($query);

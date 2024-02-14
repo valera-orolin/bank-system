@@ -1,7 +1,8 @@
 <?php
 require_once 'mysql/db_functions.php';
 
-class Disability {
+class Disability 
+{
     public static function all() {
         $query = "SELECT * FROM disability";
         return executeQuery($query);

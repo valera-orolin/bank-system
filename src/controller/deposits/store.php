@@ -38,15 +38,15 @@ try {
     $bank_cash_desk = Account::getIdByNumber('0000000000001');
     $bank_development_fund = Account::getIdByNumber('0000000000002');
 
+    $exchangeRate = Currency::getExchangeRate($currency);
+    $convertedAmount = bcdiv($amount, $exchangeRate, 8);
+
     Account::deposit($bank_cash_desk, $amount);
     Account::withdraw($bank_cash_desk, $amount);
-    Account::deposit($current_account, $amount / Currency::getExchangeRate($currency));
-    Account::withdraw($current_account, $amount / Currency::getExchangeRate($currency));
+    Account::deposit($current_account, $convertedAmount);
+    Account::withdraw($current_account, $convertedAmount);
     Account::deposit($bank_development_fund, $amount);
-    //Account::transfer($bank_cash_desk, $current_account, $amount);
-    //Account::transfer($current_account, $bank_development_fund, $amount);
 
-    // Create deposit
     $executionResult = Deposit::store($deposit_type, $start_date, $client, $current_account, $interest_account, $amount);
     if ($executionResult) {
         header("Location: /controller/deposits/index.php");

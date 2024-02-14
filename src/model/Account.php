@@ -2,7 +2,8 @@
 require_once 'mysql/db_functions.php';
 //require_once 'Currency.php';
 
-class Account {
+class Account 
+{
     public static function all() {
         $query = "SELECT * FROM account";
         return executeQuery($query);
@@ -74,28 +75,25 @@ class Account {
 
     public static function deposit($id, $amount) {
         $account = self::find($id);
-        $account['balance'] += $amount;
+        $account['balance'] = bcadd($account['balance'], $amount, 8);
         if ($account['activity'] == 'active') {
-            $account['debit'] += $amount;
+            $account['debit'] = bcadd($account['debit'], $amount, 8);
         } else {
-            $account['credit'] += $amount;
+            $account['credit'] = bcadd($account['credit'], $amount, 8);
         }
         return self::updateAccount($id, $account);
     }
 
     public static function withdraw($id, $amount) {
         $account = self::find($id);
-        if ($account['balance'] < $amount) {
-            throw new Exception("Insufficient balance");
-        }
-        $account['balance'] -= $amount;
+        $account['balance'] = bcsub($account['balance'], $amount, 8);
         if ($account['activity'] == 'active') {
-            $account['credit'] += $amount;
+            $account['credit'] = bcadd($account['credit'], $amount, 8);
         } else {
-            $account['debit'] += $amount;
+            $account['debit'] = bcadd($account['debit'], $amount, 8);
         }
         return self::updateAccount($id, $account);
-    }
+    }    
 
     /*
     public static function transfer($fromId, $toId, $amount) {

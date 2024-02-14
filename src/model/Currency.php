@@ -1,7 +1,8 @@
 <?php
 require_once 'mysql/db_functions.php';
 
-class Currency {
+class Currency 
+{
     public static function all() {
         $query = "SELECT * FROM currency";
         return executeQuery($query);
@@ -16,6 +17,11 @@ class Currency {
         $query = "INSERT INTO currency (name, symbol, exchange_rate) VALUES (?, ?, ?)";
         return executeQuery($query, [$name, $symbol, $exchange_rate]);
     }
+
+    public static function storeWithId($id, $name, $symbol, $exchange_rate) {
+        $query = "INSERT INTO currency (id, name, symbol, exchange_rate) VALUES (?, ?, ?, ?)";
+        return executeQuery($query, [$id, $name, $symbol, $exchange_rate]);
+    }    
 
     public static function update($id, $name, $symbol, $exchange_rate) {
         $query = "UPDATE currency SET name = ?, symbol = ?, exchange_rate = ? WHERE id = ?";

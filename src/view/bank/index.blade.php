@@ -16,37 +16,44 @@
                 @include('partials.header')
             </div>
 
-            <div class="px-12 pb-10">
-                <div class="text-center text-5xl mb-8 font-bold">Bank Operations</div>
-                    <div class="flex justify-center space-x-10">
-                        <form action="/controller/cities/store.php" onsubmit="return confirm('Are you sure you want to close the banking day?');" method="post" class="mb-4">
-                            <input type="submit" value="Close The Banking Day" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
-                        </form>
+            <div class="px-12 pb-10 space-y-10">
+                <div class="text-center text-5xl font-bold">Bank Operations</div>
 
-                        <form action="/controller/accounts/clear.php" onsubmit="return confirm('Are you sure you want to clear all accounts?');" method="post" class="mb-4">
-                            <input type="submit" value="Сlear Accounts" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
-                        </form>
+                <div class="flex justify-center space-x-10">
+                    @if($current_date)
+                        <div class="text-center text-xl mt-3">Current date: {{ $current_date }}</div>
+                    @else
+                        <div class="text-center text-xl mt-3">Current date isn't set</div>
+                    @endif
+                    <form action="/controller/bank/close_the_day.php" onsubmit="return confirm('Are you sure you want to close the banking day?');" method="post" class="mb-4">
+                        <input type="submit" value="Close The Banking Day" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-outduration-200">
+                    </form>
+                </div>
 
-                        <form action="/controller/deposits/clear.php" onsubmit="return confirm('Are you sure you want to clear all deposits?');" method="post" class="mb-4">
-                            <input type="submit" value="Clear Deposits" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
-                        </form>
+                <div class="flex justify-center space-x-10">
+                    <form action="/controller/accounts/clear.php" onsubmit="return confirm('Are you sure you want to clear all accounts?');" method="post" class="mb-4">
+                        <input type="submit" value="Сlear Accounts" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
+                    </form>
 
-                        <form action="/controller/deposit_types/clear.php" onsubmit="return confirm('Are you sure you want to clear all deposit types?');" method="post" class="mb-4">
-                            <input type="submit" value="Clear Deposit Types" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
-                        </form>
+                    <form action="/controller/deposits/clear.php" onsubmit="return confirm('Are you sure you want to clear all deposits?');" method="post" class="mb-4">
+                        <input type="submit" value="Clear Deposits" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
+                    </form>
 
-                        <form action="/controller/currencies/clear.php" onsubmit="return confirm('Are you sure you want to clear all currencies?');" method="post" class="mb-4">
-                            <input type="submit" value="Clear Currencies" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
-                        </form>
+                    <form action="/controller/deposit_types/clear.php" onsubmit="return confirm('Are you sure you want to clear all deposit types?');" method="post" class="mb-4">
+                        <input type="submit" value="Clear Deposit Types" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
+                    </form>
 
-                        <form action="/controller/cities/store.php" onsubmit="return confirm('Are you sure you want to set the current date to 01.01.2024?');" method="post" class="mb-4">
-                            <input type="submit" value="Refresh Day" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
-                        </form>
+                    <form action="/controller/currencies/clear.php" onsubmit="return confirm('Are you sure you want to clear all currencies?');" method="post" class="mb-4">
+                        <input type="submit" value="Clear Currencies" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
+                    </form>
 
-                        <form action="/controller/cities/store.php" onsubmit="return confirm('Are you sure you want to restart all of the bank system?');" method="post" class="mb-4">
-                            <input type="submit" value="Restart System" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
-                        </form>
-                    </div>
+                    <form action="/controller/bank/clear_the_day.php" onsubmit="return confirm('Are you sure you want to set the current date to 2024-02-13?');" method="post" class="mb-4">
+                        <input type="submit" value="Refresh Day" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
+                    </form>
+
+                    <form action="/controller/bank/restart.php" onsubmit="return confirm('Are you sure you want to restart all of the bank system?');" method="post" class="mb-4">
+                        <input type="submit" value="Restart System" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
+                    </form>
                 </div>
             </div>
         </div>

@@ -1,7 +1,8 @@
 <?php
 require_once 'mysql/db_functions.php';
 
-class City {
+class City 
+{
     public static function all() {
         $query = "SELECT * FROM city";
         return executeQuery($query);
