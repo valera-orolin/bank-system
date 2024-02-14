@@ -25,9 +25,10 @@
                     @else
                         <div class="text-center text-xl mt-3">Current date isn't set</div>
                     @endif
-                    <form action="/controller/bank/close_the_day.php" onsubmit="return confirm('Are you sure you want to close the banking day?');" method="post" class="mb-4">
+                    <form action="/controller/bank/close_the_day.php" onsubmit="return confirm('Are you sure you want to close the banking day?');" method="post" class="mb-4 space-x-10">
                         <input type="submit" value="Close The Banking Day" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-outduration-200">
-                    </form>
+                        <input type="number" name="days" min="1" value="1" required>
+                    </form>                    
                 </div>
 
                 <div class="flex justify-center space-x-10">

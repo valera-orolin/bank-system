@@ -49,6 +49,15 @@ class Account
         return $result[0]['id'];
     }
 
+    public static function getBalance($id) {
+        if ($id === null) {
+            return null;
+        }
+        $query = "SELECT balance FROM account WHERE id = ?";
+        $result = executeQuery($query, [$id]);
+        return $result[0]['balance'];
+    }
+
     public static function createCurrentAccount($client, $currency, $revocation) {
         $current_account_number = substr(str_shuffle(str_repeat($x='0123456789', ceil(13/strlen($x)) )),1,13);
         $current_account_code = $revocation == 'revocable' ? '3014' : '3414';

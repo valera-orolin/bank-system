@@ -63,4 +63,13 @@ class DepositType
         $result = executeQuery($query, [$id]);
         return $result[0]['min_amount'];
     }
+
+    public static function getPeriod($id) {
+        if ($id === null) {
+            return null;
+        }
+        $query = "SELECT period FROM deposit_type WHERE id = ?";
+        $result = executeQuery($query, [$id]);
+        return $result[0]['period'];
+    }
 }

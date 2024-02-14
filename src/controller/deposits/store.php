@@ -3,6 +3,7 @@ require '../../model/Deposit.php';
 require '../../model/Account.php';
 require '../../model/Currency.php';
 require '../../model/DepositType.php';
+require '../../model/CurrentDate.php';
 require '../../vendor/autoload.php';
 
 $deposit_type = trim($_POST['deposit_type']) ?? null;
@@ -16,6 +17,12 @@ foreach ($fields as $field) {
         echo "<script>alert('Failed to create a deposit. The field $field is empty.'); window.location.href='/controller/deposits/index.php';</script>";
         die();
     }
+}
+
+$current_date = CurrentDate::getCurrentDate();
+if (strtotime($start_date) < strtotime($current_date)) {
+    echo "<script>alert('Failed to create a deposit. Start date cannot be earlier than the current date.'); window.location.href='/controller/deposits/index.php';</script>";
+    die();
 }
 
 if ($amount < 0) {

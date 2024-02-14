@@ -59,6 +59,19 @@
                                     @foreach ($deposit as $key => $value)
                                         @if ($key == 'client' && $value['text'] == null)
                                             <td class="p-3 px-5 text-gray-500">null</td>
+                                        @elseif ($key == 'is_revocable')
+                                            @if ($value)
+                                                <td class="p-3 px-5 text-gray-500 font-bold">
+                                                    <form id="revoke-form-{{ $deposit['id'] }}" action="/controller/deposits/revoke.php" method="post">
+                                                        <input type="hidden" name="id" value="{{ $deposit['id'] }}">
+                                                        <button type="submit" class="bg-transparent border-none">
+                                                            Revoke
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            @else
+                                                <td class="p-3 px-5"></td>
+                                            @endif
                                         @elseif (is_array($value) && isset($value['url']) && isset($value['text']))
                                             <td class="p-3 px-5 text-gray-500">{{ $value['text'] }}</td>
                                         @elseif (!is_array($value))

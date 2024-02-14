@@ -29,6 +29,7 @@ foreach ($deposits as &$deposit) {
         'id' => $deposit['interest_account'],
         'text' => Account::getAccountNumber($deposit['interest_account']),
     ];
+    $deposit['is_revocable'] = DepositType::getRevocation($deposit['deposit_type']['id']) == 'revocable';
 }
 
 $clients = Client::all();
