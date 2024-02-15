@@ -48,6 +48,19 @@ class Account
         return $result[0]['balance'];
     }
 
+    public static function createAccount($client, $currency, $code, $activity) {
+        $current_account_number = substr(str_shuffle(str_repeat($x='0123456789', ceil(13/strlen($x)) )),1,13);
+        $current_account_code = $code;
+        $current_account_activity = $activity;
+        $current_account_debit = 0;
+        $current_account_credit = 0;
+        $current_account_balance = 0;
+
+        self::store($current_account_number, $current_account_code, $current_account_activity, $current_account_debit, $current_account_credit, $current_account_balance, $client, $currency);
+        return self::getIdByNumber($current_account_number);
+    }
+
+    /*
     public static function createCurrentAccount($client, $currency, $revocation) {
         $current_account_number = substr(str_shuffle(str_repeat($x='0123456789', ceil(13/strlen($x)) )),1,13);
         $current_account_code = $revocation == 'revocable' ? '3014' : '3414';
@@ -71,6 +84,7 @@ class Account
         self::store($interest_account_number, $interest_account_code, $interest_account_activity, $interest_account_debit, $interest_account_credit, $interest_account_balance, $client, $currency);
         return self::getIdByNumber($interest_account_number);
     }
+    */
 
     public static function deposit($id, $amount) {
         $account = self::find($id);

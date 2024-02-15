@@ -12,6 +12,12 @@ $days = $_POST['days'] ? $_POST['days'] : 0;
 for ($i = 0; $i < $days; $i++) {
     $deposits = Deposit::all();
     foreach ($deposits as $deposit) {
+        $start_date = new DateTime($deposit['start_date']);
+        $current_date = new DateTime(CurrentDate::getCurrentDate());
+        if ($start_date > $current_date) {
+            continue;
+        }
+
         $rate = Deposit::getRate($deposit['id']);
         $amount = Deposit::getAmount($deposit['id']);
         $currency = Deposit::getCurrency($deposit['id']);
@@ -25,8 +31,6 @@ for ($i = 0; $i < $days; $i++) {
         Account::withdraw($bank_development_fund, $interest_byn);
         Account::deposit($interest_account, $interest_cur);
 
-        $start_date = new DateTime($deposit['start_date']);
-        $current_date = new DateTime(CurrentDate::getCurrentDate());
         $interval = $start_date->diff($current_date)->days + 1;
         if ($interval % 30 == 0 && $interval > 0) {
             $balance_cur = Account::getBalance($interest_account);

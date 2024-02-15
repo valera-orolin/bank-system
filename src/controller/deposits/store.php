@@ -40,8 +40,13 @@ try {
         die();
     }
 
-    $current_account = Account::createCurrentAccount($client, $currency, $revocation);
-    $interest_account = Account::createInterestAccount($client, $currency, $revocation);
+    //$current_account = Account::createCurrentAccount($client, $currency, $revocation);
+    $code = $revocation == 'revocable' ? '3014' : '3414';
+    $current_account = Account::createAccount($client, $currency, $code, 'passive');
+    //$interest_account = Account::createInterestAccount($client, $currency, $revocation);
+    $code = $revocation == 'revocable' ? '3071' : '3471';
+    $interest_account = Account::createAccount($client, $currency, $code, 'passive');
+    
     $bank_cash_desk = Account::getIdByNumber('0000000000001');
     $bank_development_fund = Account::getIdByNumber('0000000000002');
 
