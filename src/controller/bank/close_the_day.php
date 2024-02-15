@@ -15,7 +15,7 @@ for ($i = 0; $i < $days; $i++) {
         $rate = Deposit::getRate($deposit['id']);
         $amount = Deposit::getAmount($deposit['id']);
         $currency = Deposit::getCurrency($deposit['id']);
-        $interest_byn = bcdiv(bcdiv(bcmul($amount, $rate, 8), '365', 8), '100', 8);
+        $interest_byn = bcdiv(bcdiv(bcmul($amount, $rate, 8), '360', 8), '100', 8);
 
         $interest_account = $deposit['interest_account'];
         $bank_development_fund = Account::getIdByNumber('0000000000002');

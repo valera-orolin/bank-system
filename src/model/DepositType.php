@@ -29,45 +29,30 @@ class DepositType
     }
 
     public static function getDepositTypeName($id) {
-        if ($id === null) {
-            return null;
-        }
         $query = "SELECT name FROM deposit_type WHERE id = ?";
         $result = executeQuery($query, [$id]);
         return $result[0]['name'];
     }
 
     public static function getCurrency($id) {
-        if ($id === null) {
-            return null;
-        }
         $query = "SELECT currency FROM deposit_type WHERE id = ?";
         $result = executeQuery($query, [$id]);
         return $result[0]['currency'];
     }
 
     public static function getRevocation($id) {
-        if ($id === null) {
-            return null;
-        }
         $query = "SELECT revocation FROM deposit_type WHERE id = ?";
         $result = executeQuery($query, [$id]);
         return $result[0]['revocation'];
     }
 
     public static function getMinAmount($id) {
-        if ($id === null) {
-            return null;
-        }
         $query = "SELECT min_amount FROM deposit_type WHERE id = ?";
         $result = executeQuery($query, [$id]);
         return $result[0]['min_amount'];
     }
 
     public static function getPeriod($id) {
-        if ($id === null) {
-            return null;
-        }
         $query = "SELECT period FROM deposit_type WHERE id = ?";
         $result = executeQuery($query, [$id]);
         return $result[0]['period'];

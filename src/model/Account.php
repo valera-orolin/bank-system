@@ -1,6 +1,5 @@
 <?php
 require_once 'mysql/db_functions.php';
-//require_once 'Currency.php';
 
 class Account 
 {
@@ -32,27 +31,18 @@ class Account
     }
 
     public static function getAccountNumber($id) {
-        if ($id === null) {
-            return null;
-        }
         $query = "SELECT number FROM account WHERE id = ?";
         $result = executeQuery($query, [$id]);
         return $result[0]['number'];
     }
 
     public static function getIdByNumber($number) {
-        if ($number === null) {
-            return null;
-        }
         $query = "SELECT id FROM account WHERE number = ?";
         $result = executeQuery($query, [$number]);
         return $result[0]['id'];
     }
 
     public static function getBalance($id) {
-        if ($id === null) {
-            return null;
-        }
         $query = "SELECT balance FROM account WHERE id = ?";
         $result = executeQuery($query, [$id]);
         return $result[0]['balance'];
@@ -102,32 +92,9 @@ class Account
             $account['debit'] = bcadd($account['debit'], $amount, 8);
         }
         return self::updateAccount($id, $account);
-    }    
-
-    /*
-    public static function transfer($fromId, $toId, $amount) {
-        $fromAccount = self::find($fromId);
-        $toAccount = self::find($toId);
-
-        // Get the exchange rates of the two accounts
-        $fromExchangeRate = self::getExchangeRate($fromAccount['currency']);
-        $toExchangeRate = self::getExchangeRate($toAccount['currency']);
-
-        // Convert the amount to the base currency (with id 1)
-        $baseAmount = $amount * $fromExchangeRate;
-
-        // Convert the base amount to the target currency
-        $convertedAmount = $baseAmount / $toExchangeRate;
-
-        self::withdraw($fromId, $amount);
-        self::deposit($toId, $convertedAmount);
     }
-    */
 
     private static function find($id) {
-        if ($id === null) {
-            return null;
-        }
         $query = "SELECT * FROM account WHERE id = ?";
         $result = executeQuery($query, [$id]);
         return $result[0];

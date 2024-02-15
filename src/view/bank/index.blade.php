@@ -32,16 +32,26 @@
                 </div>
 
                 <div class="flex justify-center space-x-10">
-                    <form action="/controller/accounts/clear.php" onsubmit="return confirm('Are you sure you want to clear all accounts?');" method="post" class="mb-4">
-                        <input type="submit" value="Сlear Accounts" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
-                    </form>
-
                     <form action="/controller/deposits/clear.php" onsubmit="return confirm('Are you sure you want to clear all deposits?');" method="post" class="mb-4">
                         <input type="submit" value="Clear Deposits" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
                     </form>
 
                     <form action="/controller/deposit_types/clear.php" onsubmit="return confirm('Are you sure you want to clear all deposit types?');" method="post" class="mb-4">
                         <input type="submit" value="Clear Deposit Types" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
+                    </form>
+
+                    <form action="/controller/credits/clear.php" onsubmit="return confirm('Are you sure you want to clear all credits?');" method="post" class="mb-4">
+                        <input type="submit" value="Clear Credits" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
+                    </form>
+
+                    <form action="/controller/credit_types/clear.php" onsubmit="return confirm('Are you sure you want to clear all credit types?');" method="post" class="mb-4">
+                        <input type="submit" value="Clear Credit Types" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
+                    </form>
+                </div>
+
+                <div class="flex justify-center space-x-10">
+                    <form action="/controller/accounts/clear.php" onsubmit="return confirm('Are you sure you want to clear all accounts?');" method="post" class="mb-4">
+                        <input type="submit" value="Сlear Accounts" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
                     </form>
 
                     <form action="/controller/currencies/clear.php" onsubmit="return confirm('Are you sure you want to clear all currencies?');" method="post" class="mb-4">

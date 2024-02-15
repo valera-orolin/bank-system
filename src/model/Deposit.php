@@ -29,54 +29,36 @@ class Deposit
     }
 
     public static function getRate($id) {
-        if ($id === null) {
-            return null;
-        }
         $query = "SELECT rate FROM deposit_type WHERE id = (SELECT deposit_type FROM deposit WHERE id = ?)";
         $result = executeQuery($query, [$id]);
         return $result[0]['rate'];
     }
 
     public static function getCurrency($id) {
-        if ($id === null) {
-            return null;
-        }
         $query = "SELECT currency FROM deposit_type WHERE id = (SELECT deposit_type FROM deposit WHERE id = ?)";
         $result = executeQuery($query, [$id]);
         return $result[0]['currency'];
     }
 
     public static function getAmount($id) {
-        if ($id === null) {
-            return null;
-        }
         $query = "SELECT amount FROM deposit WHERE id = ?";
         $result = executeQuery($query, [$id]);
         return $result[0]['amount'];
     }
 
     public static function getDepositType($id) {
-        if ($id === null) {
-            return null;
-        }
         $query = "SELECT deposit_type FROM deposit WHERE id = ?";
         $result = executeQuery($query, [$id]);
         return $result[0]['deposit_type'];
     }
     
     public static function getCurrentAccount($id) {
-        if ($id === null) {
-            return null;
-        }
         $query = "SELECT current_account FROM deposit WHERE id = ?";
         $result = executeQuery($query, [$id]);
         return $result[0]['current_account'];
     }
     
     public static function getInterestAccount($id) {
-        if ($id === null) {
-            return null;
-        }
         $query = "SELECT interest_account FROM deposit WHERE id = ?";
         $result = executeQuery($query, [$id]);
         return $result[0]['interest_account'];
