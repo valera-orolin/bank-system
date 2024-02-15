@@ -1,9 +1,10 @@
 <?php
+require '../../model/Credit.php';
 require '../../model/CurrentDate.php';
 require '../../vendor/autoload.php';
 use Jenssegers\Blade\Blade;
 
-CurrentDate::setCurrentDate('2024-02-16');
+Credit::clear();
 
 $blade = new Blade('../../view', '../../cache');
 echo $blade->make('bank.index', [

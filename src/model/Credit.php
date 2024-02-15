@@ -46,6 +46,12 @@ class Credit
         return $result[0]['amount'];
     }
 
+    public static function getPeriod($id) {
+        $query = "SELECT `period` FROM credit WHERE id = ?";
+        $result = executeQuery($query, [$id]);
+        return $result[0]['period'];
+    }
+
     public static function getCreditType($id) {
         $query = "SELECT credit_type FROM credit WHERE id = ?";
         $result = executeQuery($query, [$id]);
