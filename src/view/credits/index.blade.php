@@ -59,6 +59,8 @@
                                     @foreach ($credit as $key => $value)
                                         @if ($key == 'client' && $value['text'] == null)
                                             <td class="p-3 px-5 text-gray-500">null</td>
+                                        @elseif ($key == 'payment_schedule')
+                                            <td class="p-3 px-5 text-gray-500 font-bold"><a href="{{ $value['url'] }}">{{ $value['text'] }}</a></td>
                                         @elseif (is_array($value) && isset($value['url']) && isset($value['text']))
                                             <td class="p-3 px-5 text-gray-500">{{ $value['text'] }}</td>
                                         @elseif (!is_array($value))

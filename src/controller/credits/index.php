@@ -29,6 +29,11 @@ foreach ($credits as &$credit) {
         'id' => $credit['interest_account'],
         'text' => Account::getAccountNumber($credit['interest_account']),
     ];
+    $credit['payment_schedule'] = [
+        'url' => '/controller/credits/payment_schedule.php?creditid=' . $credit['id'],
+        //'url' => '/controller/credits/payment_schedule.php',
+        'text' => 'Schedule',
+    ];
 }
 
 $clients = Client::all();
