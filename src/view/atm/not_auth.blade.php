@@ -39,13 +39,13 @@
     </div>
     
     <script>
-    document.getElementById('authForm').addEventListener('submit', function(e) {
-        var number = e.target.elements.number.value;
-        var pin = e.target.elements.pin.value;
+        document.getElementById('authForm').addEventListener('submit', function(e) {
+            var number = e.target.elements.number.value;
+            var pin = e.target.elements.pin.value;
 
-        localStorage.setItem('number', number);
-        localStorage.setItem('pin', pin);
-    });
+            localStorage.setItem('number', number);
+            localStorage.setItem('pin', pin);
+        });
     </script>
 
 </body>

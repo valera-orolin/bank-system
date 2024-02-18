@@ -20,18 +20,10 @@
                 <div class="text-center text-5xl font-bold">ATM</div>
 
                 <div class="flex justify-center space-x-10">
-                    <form action="/controller/atm/balance_inquiry.php" method="post" class="mb-4" id="balanceInquiryForm">
+                    <form action="/controller/atm/index.php" method="post" id="okForm" class="mb-4">
                         <input type="hidden" name="number" id="hiddenNumber">
                         <input type="hidden" name="pin" id="hiddenPin">
-                        <input type="submit" value="Balance Inquiry" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
-                    </form>
-
-                    <form action="/controller/atm/cash_withdrawal.php" method="post" class="mb-4">
-                        <input type="submit" value="Cash Withdrawal" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
-                    </form>
-
-                    <form action="/controller/atm/payment.php" method="post" class="mb-4">
-                        <input type="submit" value="Payment" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
+                        <input type="submit" value="OK" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
                     </form>
 
                     <form action="/controller/atm/index.php" method="post" id="pickUpForm" class="mb-4">
@@ -45,7 +37,7 @@
     </div>
     
     <script>
-        document.getElementById('balanceInquiryForm').addEventListener('submit', function(e) {
+        document.getElementById('okForm').addEventListener('submit', function(e) {
             var number = localStorage.getItem('number');
             var pin = localStorage.getItem('pin');
         

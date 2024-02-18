@@ -49,7 +49,10 @@ class CreditCard
     public static function authenticate($number, $pin) {
         $query = "SELECT * FROM credit_card WHERE number = ? AND pin = ?";
         $result = executeQuery($query, [$number, $pin]);
-        return !empty($result);
-    }
-    
+        if (!empty($result)) {
+            return $result[0]['id'];
+        } else {
+            return null;
+        }
+    }    
 }

@@ -48,6 +48,12 @@ class Account
         return $result[0]['balance'];
     }
 
+    public static function getCurrency($id) {
+        $query = "SELECT currency FROM account WHERE id = ?";
+        $result = executeQuery($query, [$id]);
+        return $result[0]['currency'];
+    }
+
     public static function createAccount($client, $currency, $code, $activity) {
         $current_account_number = substr(str_shuffle(str_repeat($x='0123456789', ceil(13/strlen($x)) )),1,13);
         $current_account_code = $code;
