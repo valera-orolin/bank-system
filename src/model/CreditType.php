@@ -18,6 +18,12 @@ class CreditType
         return executeQuery($query, [$name, $rate, $currency, $min_amount, $max_amount, $min_period, $max_period, $payment_type]);
     }
 
+    public static function storeWithId($id, $name, $rate, $currency, $min_amount, $max_amount, $min_period, $max_period, $payment_type) {
+        $query = "INSERT INTO credit_type (id, name, rate, currency, min_amount, max_amount, min_period, max_period, payment_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        return executeQuery($query, [$id, $name, $rate, $currency, $min_amount, $max_amount, $min_period, $max_period, $payment_type]);
+    }
+    
+
     public static function update($id, $name, $rate, $currency, $min_amount, $max_amount, $min_period, $max_period, $payment_type) {
         $query = "UPDATE credit_type SET name = ?, rate = ?, currency = ?, min_amount = ?, max_amount = ?, min_period = ?, max_period = ?, payment_type = ? WHERE id = ?";
         return executeQuery($query, [$name, $rate, $currency, $min_amount, $max_amount, $min_period, $max_period, $payment_type, $id]);

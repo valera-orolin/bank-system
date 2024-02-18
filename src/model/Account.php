@@ -60,32 +60,6 @@ class Account
         return self::getIdByNumber($current_account_number);
     }
 
-    /*
-    public static function createCurrentAccount($client, $currency, $revocation) {
-        $current_account_number = substr(str_shuffle(str_repeat($x='0123456789', ceil(13/strlen($x)) )),1,13);
-        $current_account_code = $revocation == 'revocable' ? '3014' : '3414';
-        $current_account_activity = "passive";
-        $current_account_debit = 0;
-        $current_account_credit = 0;
-        $current_account_balance = 0;
-
-        self::store($current_account_number, $current_account_code, $current_account_activity, $current_account_debit, $current_account_credit, $current_account_balance, $client, $currency);
-        return self::getIdByNumber($current_account_number);
-    }
-
-    public static function createInterestAccount($client, $currency, $revocation) {
-        $interest_account_number = substr(str_shuffle(str_repeat($x='0123456789', ceil(13/strlen($x)) )),1,13);
-        $interest_account_code = $revocation == 'revocable' ? '3071' : '3471';
-        $interest_account_activity = "passive";
-        $interest_account_debit = 0;
-        $interest_account_credit = 0;
-        $interest_account_balance = 0;
-
-        self::store($interest_account_number, $interest_account_code, $interest_account_activity, $interest_account_debit, $interest_account_credit, $interest_account_balance, $client, $currency);
-        return self::getIdByNumber($interest_account_number);
-    }
-    */
-
     public static function deposit($id, $amount) {
         $account = self::find($id);
         $account['balance'] = bcadd($account['balance'], $amount, 8);
