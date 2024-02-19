@@ -20,22 +20,23 @@
                 <div class="text-center text-5xl font-bold">ATM</div>
 
                 <div class="flex justify-center space-x-10">
-                    <form action="/controller/atm/balance_inquiry.php" method="post" class="auth-form mb-4">
+                    <form action="/controller/atm/payment/pay.php" method="post" class="mb-4 auth-form">
                         <input type="hidden" name="number" class="hidden-number">
                         <input type="hidden" name="pin" class="hidden-pin">
-                        <input type="submit" value="Balance Inquiry" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
-                    </form>
-                    
-                    <form action="/controller/atm/cash_withdrawal/index.php" method="post" class="auth-form mb-4">
-                        <input type="hidden" name="number" class="hidden-number">
-                        <input type="hidden" name="pin" class="hidden-pin">
-                        <input type="submit" value="Cash Withdrawal" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
+                        <input type="text" name="phone_number" placeholder="Number" maxlength="9" value="447485879" required class="border border-black">
+                        <select name="operator" required class="border rounded px-3 py-2 mr-2">
+                            <option value="A1">A1</option>
+                            <option value="life">life</option>
+                            <option value="MTS">MTS</option>
+                        </select>
+                        <input type="number" name="amount" placeholder="Amount" required class="border border-black">
+                        <input type="submit" value="Pay" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
                     </form>
 
-                    <form action="/controller/atm/payment/index.php" method="post" class="mb-4 auth-form">
+                    <form action="/controller/atm/index.php" method="post" class="mb-4 auth-form">
                         <input type="hidden" name="number" class="hidden-number">
                         <input type="hidden" name="pin" class="hidden-pin">
-                        <input type="submit" value="Payment" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
+                        <input type="submit" value="Back" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
                     </form>
 
                     <form action="/controller/atm/index.php" method="post" id="pickUpForm" class="mb-4">

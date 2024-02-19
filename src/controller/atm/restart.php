@@ -32,6 +32,9 @@ CreditType::storeWithId(2, 'Автокредит', 16, 3, 5000, 200000, 90, 3600
 
 Account::store('0000000000001', '1010', 'active', 0, 0, 0, null, 1);
 Account::store('0000000000002', '7327', 'passive', 0, 100000000000, 100000000000, null, 1);
+Account::store('0000000000003', '5050', 'active', 0, 0, 0, null, 1);
+Account::store('0000000000004', '5050', 'active', 0, 0, 0, null, 1);
+Account::store('0000000000005', '5050', 'active', 0, 0, 0, null, 1);
 
 CurrentDate::setCurrentDate('2024-02-16');
 
