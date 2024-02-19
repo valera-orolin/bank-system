@@ -20,34 +20,48 @@
                 <div class="text-center text-5xl font-bold">ATM</div>
 
                 <div class="flex justify-center space-x-10">
-                    <form action="/controller/atm/index.php" method="post" id="okForm" class="mb-4">
-                        <input type="hidden" name="number" id="hiddenNumber">
-                        <input type="hidden" name="pin" id="hiddenPin">
-                        <input type="submit" value="OK" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
+                    <form action="/controller/atm/index.php" method="post" class="mb-4 auth-form">
+                        <input type="hidden" name="number" class="hidden-number">
+                        <input type="hidden" name="pin" class="hidden-pin">
+                        <input type="submit" value="Back" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
                     </form>
 
                     <form action="/controller/atm/index.php" method="post" id="pickUpForm" class="mb-4">
                         <input type="submit" value="Pick Up The Card" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">
                     </form>
+
+                    <button id="printReceipt" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-200">Print Receipt</button>
                 </div>
 
-                <div class="text-center">{{ $message }}</div>
+                <div id="message" class="text-center">{{ $message }}</div>
             </div>
         </div>
     </div>
     
     <script>
-        document.getElementById('okForm').addEventListener('submit', function(e) {
-            var number = localStorage.getItem('number');
-            var pin = localStorage.getItem('pin');
-        
-            document.getElementById('hiddenNumber').value = number;
-            document.getElementById('hiddenPin').value = pin;
+        document.querySelectorAll('.auth-form').forEach(function(form) {
+            form.addEventListener('submit', function(e) {
+                var number = localStorage.getItem('number');
+                var pin = localStorage.getItem('pin');
+
+                form.querySelector('.hidden-number').value = number;
+                form.querySelector('.hidden-pin').value = pin;
+            });
         });
 
         document.getElementById('pickUpForm').addEventListener('submit', function(e) {
             localStorage.removeItem('number');
             localStorage.removeItem('pin');
+        });
+
+        document.getElementById('printReceipt').addEventListener('click', function() {
+            var receiptContent = document.getElementById('message').textContent;
+            var printWindow = window.open('', '_blank');
+            printWindow.document.write('<html><head><title>Print Receipt</title></head><body>');
+            printWindow.document.write('<p>' + receiptContent + '</p>');
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
         });
     </script>
 

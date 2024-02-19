@@ -12,11 +12,11 @@ use Jenssegers\Blade\Blade;
 
 Deposit::clear();
 Credit::clear();
+CreditCard::clear();
 Account::clear();
 DepositType::clear();
 CreditType::clear();
 Currency::clear();
-CreditCard::clear();
 
 Currency::storeWithId(1, 'Белорусский рубль', 'BYN', 1.0);
 Currency::storeWithId(2, 'Российский рубль', 'RUB', 0.0354);
