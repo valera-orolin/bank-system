@@ -6,9 +6,16 @@ use Jenssegers\Blade\Blade;
 $number = $_POST['number'] ?? null;
 $pin = $_POST['pin'] ?? null;
 
-$auth = CreditCard::authenticate($number, $pin);
-
 $blade = new Blade('../../../view', '../../../cache');
+
+try {
+    $auth = CreditCard::authenticate($number, $pin);
+} catch (Exception $e) {
+    echo $blade->make('atm.not_auth', [
+        'message' => $e->getMessage(),
+    ])->render();
+    die();
+}
 
 if ($auth) {
     echo $blade->make('atm.cash_withdrawal', [

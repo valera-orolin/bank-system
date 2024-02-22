@@ -1,5 +1,6 @@
 <?php
 require_once 'mysql/db_functions.php';
+session_start();
 
 class CreditCard 
 {
@@ -47,12 +48,22 @@ class CreditCard
     }
 
     public static function authenticate($number, $pin) {
+        if (!isset($_SESSION['attemptCount'][$number])) {
+            $_SESSION['attemptCount'][$number] = 0;
+        }
+
+        if ($_SESSION['attemptCount'][$number] >= 3) {
+            throw new Exception('Login attempts exceeded');
+        }
+
         $query = "SELECT * FROM credit_card WHERE number = ? AND pin = ?";
         $result = executeQuery($query, [$number, $pin]);
         if (!empty($result)) {
+            $_SESSION['attemptCount'][$number] = 0;
             return $result[0]['id'];
         } else {
+            $_SESSION['attemptCount'][$number]++;
             return null;
         }
-    }    
+    }
 }

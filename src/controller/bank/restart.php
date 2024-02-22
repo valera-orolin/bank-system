@@ -6,11 +6,13 @@ require '../../model/CreditType.php';
 require '../../model/Deposit.php';
 require '../../model/Credit.php';
 require '../../model/CurrentDate.php';
+require '../../model/CreditCard.php';
 require '../../vendor/autoload.php';
 use Jenssegers\Blade\Blade;
 
 Deposit::clear();
 Credit::clear();
+CreditCard::clear();
 Account::clear();
 DepositType::clear();
 CreditType::clear();
@@ -31,7 +33,7 @@ CreditType::store('Автокредит', 16, 3, 5000, 200000, 90, 3600, 'differ
 Account::store('0000000000001', '1010', 'active', 0, 0, 0, null, 1);
 Account::store('0000000000002', '7327', 'passive', 0, 100000000000, 100000000000, null, 1);
 
-CurrentDate::setCurrentDate('2024-02-16');
+CurrentDate::setCurrentDate('2024-02-22');
 
 $blade = new Blade('../../view', '../../cache');
 echo $blade->make('bank.index', [

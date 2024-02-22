@@ -36,7 +36,7 @@ Account::store('0000000000003', '5050', 'active', 0, 0, 0, null, 1);
 Account::store('0000000000004', '5050', 'active', 0, 0, 0, null, 1);
 Account::store('0000000000005', '5050', 'active', 0, 0, 0, null, 1);
 
-CurrentDate::setCurrentDate('2024-02-16');
+CurrentDate::setCurrentDate('2024-02-22');
 
 
 $credit_type = 1;

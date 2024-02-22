@@ -3,7 +3,7 @@ require '../../model/CurrentDate.php';
 require '../../vendor/autoload.php';
 use Jenssegers\Blade\Blade;
 
-CurrentDate::setCurrentDate('2024-02-16');
+CurrentDate::setCurrentDate('2024-02-22');
 
 $blade = new Blade('../../view', '../../cache');
 echo $blade->make('bank.index', [

@@ -16,9 +16,16 @@ if ($pin !== null && !preg_match('/^\d{4}$/', $pin)) {
     die();
 }
 
-$auth = CreditCard::authenticate($number, $pin);
-
 $blade = new Blade('../../view', '../../cache');
+
+try {
+    $auth = CreditCard::authenticate($number, $pin);
+} catch (Exception $e) {
+    echo $blade->make('atm.not_auth', [
+        'message' => $e->getMessage(),
+    ])->render();
+    die();
+}
 
 if ($auth) {
     echo $blade->make('atm.auth', [
