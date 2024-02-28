@@ -48,6 +48,10 @@ class CreditCard
     }
 
     public static function authenticate($number, $pin) {
+        if (empty($number)) {
+            return null;
+        }
+
         if (!isset($_SESSION['attemptCount'][$number])) {
             $_SESSION['attemptCount'][$number] = 0;
         }
